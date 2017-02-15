@@ -2,17 +2,17 @@ package model.facility;
 
 public class FacilityDetail {
 	
-	private String facilityID;
+	private String apartmentID;
 	private String address;
 	private int age;
 	private int capacity;
 	
-	public void setFacilityID(String facilityID){
-		this.facilityID = facilityID;
+	public void setApartmentID(String apartmentID){
+		this.apartmentID = apartmentID;
 	}
     
-	public String getFacilityID(){
-		return facilityID;
+	public String getApartmentID(){
+		return apartmentID;
 	}
 	
 	public void setAdress(String address){
