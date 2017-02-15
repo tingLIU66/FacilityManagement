@@ -6,9 +6,6 @@ import model.facility.Apartment;
 import model.facility.FacilityDetail;
 
 
-//o public object addNewFacility()
-//o public void addFacilityDetail()
-//o public object removeFacility() 
 
 public class FacilityDAO {
 	
