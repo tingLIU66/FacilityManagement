@@ -38,7 +38,7 @@ public class FacilityAdmin {
 		return facilitydao.addNewFacility(apartmentID, name);
 	}
 	
-	public String removeFaciliti(String apartmentID){
+	public String removeFacility(String apartmentID){
 		return facilitydao.removeFacility(apartmentID);
 	}
 }
