@@ -1,19 +1,13 @@
 package model.facility;
 
 public class FacilityDetail {
-	
-	private String facilityID;
+		
 	private String address;
+	private String zipcode;
 	private int age;
+	private String parking;
 	private int capacity;
-	
-	public void setFacilityID(String facilityID){
-		this.facilityID = facilityID;
-	}
-    
-	public String getFacilityID(){
-		return facilityID;
-	}
+		
 	
 	public void setAdress(String address){
 		this.address = address;
@@ -22,6 +16,15 @@ public class FacilityDetail {
 	public String getAddress(){
 		return address;
 	}
+	
+	public void setZipcode(String zipcode){
+		this.zipcode = zipcode;
+	}
+    
+	public String getZipcode(){
+		return zipcode;
+	}
+	
 	public void setAge(int age){
 		this.age = age;
 	}
@@ -29,6 +32,15 @@ public class FacilityDetail {
 	public int getAge(){
 		return age;
 	}
+	
+	public void setParking(String parking){
+		this.parking = parking;
+	}
+    
+	public String getParking(){
+		return parking;
+	}
+	
 	public void setCapacity(int capacity){
 		this.capacity = capacity;
 	}

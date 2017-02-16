@@ -7,13 +7,37 @@ import dal.FacilityDAO;
 
 public class Apartment {
 	
-
+	private String apartmentID;
+	private String name;
+	
 	FacilityDAO facilitydao= new FacilityDAO();
+	
+	public void setApartmentID(String apartmentID){
+		
+		this.apartmentID = apartmentID;
+	}
+	
+	public String getApartmentID(){
+		
+		return apartmentID;
+	}
+	
+	public void setName(String name){
+		
+		this.name = name;
+	}
+	
+	public String getName(){
+		
+		return name;
+	}
 	
 	public Set<Apartment> listFacilities() {
 		
 		return facilitydao.listFacilities();
 	}
+	
+	
 
     public FacilityDetail getFacilityInformation(int apartmentID) {
 		
