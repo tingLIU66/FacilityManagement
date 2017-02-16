@@ -1,6 +1,5 @@
 package model.facility;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import dal.FacilityDAO;
@@ -37,17 +36,21 @@ public class Apartment {
 		return facilitydao.listFacilities();
 	}
 	
-	
-
-    public FacilityDetail getFacilityInformation(int apartmentID) {
+	public Apartment getFacilityInformation(String apartmentID) {
 		
 		return facilitydao.getFacilityInformation(apartmentID);
 	}
     
-    public int requestAvailableCapacity(int apartmentID) {
+    public int requestAvailableCapacity(String apartmentID) {
         
     	return facilitydao.requestAvailableCapacity(apartmentID);
        
       }
+    
+    public String addFacilityDetail(String apartmentID,FacilityDetail facilitydetail) {
+    	
+    	return facilitydao.addFacilityDetail(apartmentID, facilitydetail);
+    	
+    }
 
 }
