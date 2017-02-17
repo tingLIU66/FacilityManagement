@@ -59,9 +59,35 @@ public Set<Apartment> listFacilities() {
 		
 	}
 
-public Apartment getFacilityInformation(String apartmentID) {
+public FacilityDetail getFacilityInformation(String apartmentID) {
+	FacilityDetail fdetail = new FacilityDetail();
+	String getquery = "SELECT * FROM facilitydetail WHERE `ApartmentID`=?";
+	Connection connection = super.getConnection();
+	Statement stmt = null;
+	try {
+		stmt = connection.createStatement();
+
+		PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(getquery);
+		preStatement.setString(1, apartmentID);
+		ResultSet rs = preStatement.executeQuery();
+		
+		if(rs.next()){
+			fdetail.setAdress(rs.getString(1));
+			fdetail.setZipcode(rs.getString(2));
+			fdetail.setAge(rs.getInt(3));
+			fdetail.setCapacity(rs.getInt(4));			
+			fdetail.setParking(rs.getString(5));	
+		}
+		
+		stmt.close();
+		
+	} catch (SQLException e) {
+		System.out.println(e.toString());
+	}
+
+	super.closeConnection(connection);
 	
-	return null;
+	return fdetail;
 }
 
 /**
@@ -142,8 +168,8 @@ public String addFacilityDetail(String apartmentID, FacilityDetail facilitydetai
 public Apartment addNewFacility(String apartmentID, String name){
 	
 	Apartment apartment = new Apartment();
-	String addquery = "INSERT INTO `Apartment` (`ProductID`, `Name`) VALUES (?,?);";
-	String selectquery = "Select * From Product where apartmentID = ?";
+	String addquery = "INSERT INTO `Apartment` (`ApartmentID`, `Name`) VALUES (?,?);";
+	String selectquery = "Select * From apartment where apartmentID = ?";
 	Connection connection = super.getConnection();
 	Statement stmt = null;
 	
@@ -160,8 +186,10 @@ public Apartment addNewFacility(String apartmentID, String name){
 		preStatement1.setString(1, apartmentID);
 		ResultSet rs1 = preStatement1.executeQuery();
 		
+		if(rs1.next()){
 		apartment.setApartmentID(apartmentID);
 		apartment.setName(rs1.getString(2));			
+		}
 		
 		stmt.close();
 		

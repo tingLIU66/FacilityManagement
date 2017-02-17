@@ -6,6 +6,7 @@ public class Cost {
 	private int costNo;
 	private float laborCost;	
 	private float materialCost;
+	private float total;
 	
 	public void setCostNo(int costNo){
 		this.costNo = costNo;
@@ -30,5 +31,9 @@ public class Cost {
     
 	public float getMaterialCost(){
 		return materialCost;
+	}
+	    
+	public float getTotal(){
+		return laborCost + materialCost;
 	}
 }

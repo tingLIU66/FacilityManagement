@@ -7,7 +7,7 @@ public class MaintenanceOrder {
 	private int orderNo;
 	private Date orderDate;	
 	private String orderStatus;	
-	private int costNo;
+	private Cost cost;
 	
 	
 	public void setOrderNo(int orderNo){
@@ -35,12 +35,12 @@ public class MaintenanceOrder {
 	}
 	
 	
-	public void setCostNo(int costNo){
-		this.costNo = costNo;
+	public void setCost(Cost cost){
+		this.cost = cost;
 	}
     
-	public int getCostNo(){
-		return costNo;
+	public Cost getCost(){
+		return cost;
 	}
 	
 

@@ -31,12 +31,9 @@ public class Apartment {
 		return name;
 	}
 	
-	public Set<Apartment> listFacilities() {
-		
-		return facilitydao.listFacilities();
-	}
+
 	
-	public Apartment getFacilityInformation(String apartmentID) {
+	public FacilityDetail getFacilityInformation(String apartmentID) {
 		
 		return facilitydao.getFacilityInformation(apartmentID);
 	}

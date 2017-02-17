@@ -1,5 +1,7 @@
 package model.facility;
 
+import java.util.Set;
+
 import dal.FacilityDAO;
 
 public class FacilityAdmin {
@@ -32,6 +34,11 @@ public class FacilityAdmin {
     
 	public String getOfficePhoneNo(){
 		return officePhoneNo;
+	}
+	
+	public Set<Apartment> listFacilities() {
+		
+		return facilitydao.listFacilities();
 	}
 	
 	public Apartment adddNewFacility(String apartmentID, String name){
