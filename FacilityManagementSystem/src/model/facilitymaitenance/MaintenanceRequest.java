@@ -2,14 +2,16 @@ package model.facilitymaitenance;
 
 import java.sql.Date;
 
+import model.facilityuse.AptUser;
 
-public class MaitenanceRequest {
+
+public class MaintenanceRequest {
 		
 	private int requestNo;
 	private String problemDescription;
 	private Date requestDate;	
 	private int problemtypeNo;
-	private String username;
+	private AptUser aptuser;
 	
 	public void setRequestNo(int requestNo){
 		this.requestNo = requestNo;
@@ -42,11 +44,11 @@ public class MaitenanceRequest {
 		return problemtypeNo;
 	}
 	
-	public void setUserName(String username){
-		this.username = username;
+	public void setAptUser(AptUser aptuser){
+		this.aptuser = aptuser;
 	}
     
-	public String getUserName(){
-		return username;
+	public AptUser getAptUser(){
+		return aptuser;
 	}
 }

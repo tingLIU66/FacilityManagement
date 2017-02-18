@@ -3,7 +3,7 @@ package model.facilitymaitenance;
 public class FacilityProblem {
 
 	private int problemtypeNo;
-	private String problemTypen;
+	private String problemType;
 	
 	public void setProblemTypeNo(int problemtypeNo){
 		this.problemtypeNo = problemtypeNo;
@@ -14,11 +14,11 @@ public class FacilityProblem {
 	}
 	
 	public void setProblemType(String problemTypen){
-		this.problemTypen = problemTypen;
+		this.problemType = problemType;
 	}
     
 	public String getProblemType(){
-		return problemTypen;
+		return problemType;
 	}
 
 }

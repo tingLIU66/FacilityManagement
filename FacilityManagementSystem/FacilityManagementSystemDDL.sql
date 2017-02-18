@@ -5,17 +5,17 @@ USE FacilityManagementSystem;
 
 -- Create tables
 CREATE TABLE IF NOT EXISTS Apartment
-(ApartmentID 			VARCHAR(10) NOT NULL,
-Name 			           VARCHAR(50),
+(ApartmentID 		VARCHAR(10) NOT NULL,
+Name 			      VARCHAR(50),
 CONSTRAINT Facility_PK PRIMARY KEY (ApartmentID));
 
 CREATE TABLE IF NOT EXISTS FacilityDetail
 (Address 			VARCHAR(255) NOT NULL,
-Zipcode                                  VARCHAR(6),
-Age				INT,
+Zipcode             VARCHAR(6),
+Age					INT,
 Capatity			INT,
-Parking                                   VARCHAR(5),
-ApartmentID 			VARCHAR(10),
+Parking             VARCHAR(5),
+ApartmentID 		VARCHAR(10),
 CONSTRAINT Facility_PK PRIMARY KEY (Address),
 CONSTRAINT Unit_FK1 FOREIGN KEY(ApartmentID) REFERENCES Apartment(ApartmentID));
 
@@ -65,8 +65,9 @@ CONSTRAINT FacilityProblem_PK PRIMARY KEY (ProblemTypeNo));
 
 CREATE TABLE IF NOT EXISTS MaintenanceRequest
 (RequestNo 			INT NOT NULL AUTO_INCREMENT,
-RequestDate                       	DATE,
-ProblemTypeNo		INT,
+RequestDate             TIMESTAMP,
+ProblemTypeNo		    INT,
+ProblemDescription		VARCHAR(255),
 UserName 			VARCHAR(20),
 CONSTRAINT MaintenanceRequest_PK PRIMARY KEY (RequestNo),
 CONSTRAINT MaintenanceRequest_FK1 FOREIGN KEY(ProblemTypeNo) REFERENCES  FacilityProblem (ProblemTypeNo),
@@ -74,20 +75,20 @@ CONSTRAINT MaintenanceRequest_FK2 FOREIGN KEY(UserName) REFERENCES  AptUser (Use
 
 CREATE TABLE IF NOT EXISTS Cost
 (CostNo 			INT NOT NULL AUTO_INCREMENT,
-LaborCost                       	DECIMAL(6,2),
+LaborCost               DECIMAL(6,2),
 MaterialCost			DECIMAL(6,2),
 CONSTRAINT Cost_PK PRIMARY KEY (CostNo));
 
 CREATE TABLE IF NOT EXISTS Schedule
 (ScheduleNo 			INT NOT NULL AUTO_INCREMENT,
-ScheduleDate                       	DATE,
-StaffID 			INT,
+ScheduleDate            TIMESTAMP,
+StaffID 			    INT,
 CONSTRAINT Schedule_PK PRIMARY KEY (ScheduleNo),
 CONSTRAINT Schedule_FK FOREIGN KEY(StaffID) REFERENCES  Staff (StaffID));
 
 CREATE TABLE IF NOT EXISTS MaintenanceOrder
 (OrderNo 			INT NOT NULL AUTO_INCREMENT,
-OrderDate                       	DATE,
+OrderDate           TIMESTAMP,
 OrderStatus			VARCHAR(20),
 CostNo 			INT,
 CONSTRAINT MaintenanceOrder_PK PRIMARY KEY (OrderNo),
@@ -95,12 +96,12 @@ CONSTRAINT MaintenanceOrder_FK FOREIGN KEY(CostNo) REFERENCES Cost (CostNo));
 
 CREATE TABLE IF NOT EXISTS Log
 (LogID			INT NOT NULL AUTO_INCREMENT,
-LogDate         		DATE,       
+LogDate         TIMESTAMP,       
 LogInfo		VARCHAR(255),
 CONSTRAINT Log_PK PRIMARY KEY (LogID));
 
 CREATE TABLE IF NOT EXISTS Maintenance  
-(MaintenanceNo               INT NOT NULL AUTO_INCREMENT,
+(MaintenanceNo           INT NOT NULL AUTO_INCREMENT,
 ApartmentID 			VARCHAR(10),
 OrderNo 			INT,
 RequestNo			INT,
@@ -118,21 +119,27 @@ CONSTRAINT Maintenance_FK5 FOREIGN KEY(LogID) REFERENCES  Log (LogID));
 INSERT INTO apartment(`ApartmentID`,`Name`) VALUES('APT001', 'Optima Chicago Center');
 INSERT INTO apartment (`ApartmentID`, `Name`) VALUES('APT002', 'K2 Apartments');
 INSERT INTO apartment (`ApartmentID`, `Name`) VALUES('APT003', 'Buena Shores');
-INSERT INTO FacilityDetail(`Address`,`Zipcode`, `Age`,`Capatity`,`Parking`,`ApartmentID`) 
-VALUES('200 E Illinois St, Chicago, IL', '60611', 3 , 325, 'Yes', 'APT001');
-INSERT INTO FacilityDetail(`Address`,`Zipcode`,`Age`,`Capatity`,`Parking`,`ApartmentID`) 
-VALUES('365 N Halsted St, Chicago, IL', '60661',3,425, 'Yes', 'APT002');
-INSERT INTO FacilityDetail(`Address`,`Zipcode`,`Age`,`Capatity`,`Parking`,`ApartmentID`) 
-VALUES('833 W Buena Ave, Chicago, IL', '60613', 47, 210, 'No', 'APT003');
+INSERT INTO FacilityDetail(`Address`,`Zipcode`, `Age`,`Capatity`,`Parking`,`ApartmentID`) VALUES('200 E Illinois St, Chicago, IL', '60611', 3 , 325, 'Yes', 'APT001');
+INSERT INTO FacilityDetail(`Address`,`Zipcode`,`Age`,`Capatity`,`Parking`,`ApartmentID`) VALUES('365 N Halsted St, Chicago, IL', '60661',3,425, 'Yes', 'APT002');
+INSERT INTO FacilityDetail(`Address`,`Zipcode`,`Age`,`Capatity`,`Parking`,`ApartmentID`) VALUES('833 W Buena Ave, Chicago, IL', '60613', 47, 210, 'No', 'APT003');
 
 INSERT INTO unit(`UnitNo`,`Bedroom`,`UnitStatus`,`ApartmentID`) VALUES('1A',1,'Available','APT001');
 INSERT INTO unit(`UnitNo`,`Bedroom`,`UnitStatus`,`ApartmentID`) VALUES('1B',2,'Rented','APT001');
+INSERT INTO unit(`UnitNo`,`Bedroom`,`UnitStatus`,`ApartmentID`) VALUES('2A',1,'Available','APT001');
 INSERT INTO unit(`UnitNo`,`Bedroom`,`UnitStatus`,`ApartmentID`) VALUES('2B',2,'Rented','APT001');
 INSERT INTO unit(`UnitNo`,`Bedroom`,`UnitStatus`,`ApartmentID`) VALUES('101',1,'Rented','APT002');
 INSERT INTO unit(`UnitNo`,`Bedroom`,`UnitStatus`,`ApartmentID`) VALUES('102',2,'Rented','APT002');
 INSERT INTO unit(`UnitNo`,`Bedroom`,`UnitStatus`,`ApartmentID`) VALUES('103',2,'Available','APT002');
+INSERT INTO unit(`UnitNo`,`Bedroom`,`UnitStatus`,`ApartmentID`) VALUES('104',3,'Available','APT002');
 INSERT INTO unit(`UnitNo`,`Bedroom`,`UnitStatus`,`ApartmentID`) VALUES('1001',1,'Rented','APT003');
 INSERT INTO unit(`UnitNo`,`Bedroom`,`UnitStatus`,`ApartmentID`) VALUES('1002',2,'Available','APT003');
+INSERT INTO unit(`UnitNo`,`Bedroom`,`UnitStatus`,`ApartmentID`) VALUES('1003',3,'Available','APT003');
 
+INSERT INTO aptuser(`UserName`,`PhoneNo`,`UnitNo`,`ApartmentID`) VALUES('Ting Liu','3124446666','1A','APT001');
 
+INSERT INTO facilityproblem(`ProblemType`) VALUES('Plumbing');
+INSERT INTO facilityproblem(`ProblemType`) VALUES('Electronics and appliances');
+INSERT INTO facilityproblem(`ProblemType`) VALUES('Interior');
+INSERT INTO facilityproblem(`ProblemType`) VALUES('Exterior');
 
+INSERT INTO maintenancerequest(`RequestDate`,`ProblemTypeNo`,`ProblemDescription`,`UserName`) VALUES(CURRENT_DATE, 1, 'Bathroom toilit leaking','Ting Liu');
