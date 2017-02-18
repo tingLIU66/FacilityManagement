@@ -2,11 +2,14 @@ package model.facilitymaitenance;
 
 import java.sql.Date;
 
+import model.facility.Staff;
+
 public class Schedule {
 	
 	private int scheduleNo;
 	private Date scheduleDate;	
-	private int StaffID;
+	private Staff staff;
+	private MaintenanceRequest maintrequest;
 	
 	
 	public void setScheduleNo(int scheduleNo){
@@ -24,14 +27,22 @@ public class Schedule {
 	public Date getScheduleDate(){
 		return scheduleDate;
 	}
-
 	
-	public void setStaffID(int StaffID){
-		this.StaffID = StaffID;
+	public void setStaff(Staff staff){
+		this.staff = staff;
 	}
     
-	public int getStaffID(){
-		return StaffID;
+	public Staff getStaff(){
+		return staff;
 	}
+	
+	public void setMaintenanceRequest(MaintenanceRequest maintrequest){
+		this.maintrequest = maintrequest;
+	}
+    
+	public MaintenanceRequest getMaintenanceRequest(){
+		return maintrequest;
+	}
+	
 	
 }

@@ -53,7 +53,7 @@ CONSTRAINT Inspection_FK FOREIGN KEY(ApartmentID) REFERENCES  Apartment(Apartmen
 CREATE TABLE IF NOT EXISTS AptUser
 (UserName 			VARCHAR(20) NOT NULL,
 PhoneNo			VARCHAR(20),
-UnitNo                       		INT, 
+UnitNo               VARCHAR(10), 
 ApartmentID 			VARCHAR(10),
 CONSTRAINT FacilityUser_PK PRIMARY KEY (UserName),
 CONSTRAINT FacilityUser_FK FOREIGN KEY(ApartmentID) REFERENCES  Apartment (ApartmentID));
@@ -81,18 +81,22 @@ CONSTRAINT Cost_PK PRIMARY KEY (CostNo));
 
 CREATE TABLE IF NOT EXISTS Schedule
 (ScheduleNo 			INT NOT NULL AUTO_INCREMENT,
-ScheduleDate            TIMESTAMP,
+RequestNo 			    INT,
+ScheduleDate            DATE,
 StaffID 			    INT,
 CONSTRAINT Schedule_PK PRIMARY KEY (ScheduleNo),
-CONSTRAINT Schedule_FK FOREIGN KEY(StaffID) REFERENCES  Staff (StaffID));
+CONSTRAINT Schedule_FK1 FOREIGN KEY(StaffID) REFERENCES  Staff (StaffID),
+CONSTRAINT Schedule_FK2 FOREIGN KEY(RequestNo) REFERENCES  MaintenanceRequest (RequestNo));
 
 CREATE TABLE IF NOT EXISTS MaintenanceOrder
 (OrderNo 			INT NOT NULL AUTO_INCREMENT,
 OrderDate           TIMESTAMP,
+ScheduleNo 			INT,
 OrderStatus			VARCHAR(20),
-CostNo 			INT,
+CostNo 			    INT,
 CONSTRAINT MaintenanceOrder_PK PRIMARY KEY (OrderNo),
-CONSTRAINT MaintenanceOrder_FK FOREIGN KEY(CostNo) REFERENCES Cost (CostNo));
+CONSTRAINT MaintenanceOrder_FK1 FOREIGN KEY(CostNo) REFERENCES Cost (CostNo),
+CONSTRAINT MaintenanceOrder_FK2 FOREIGN KEY(ScheduleNo) REFERENCES Schedule (ScheduleNo));
 
 CREATE TABLE IF NOT EXISTS Log
 (LogID			INT NOT NULL AUTO_INCREMENT,
@@ -106,7 +110,7 @@ ApartmentID 			VARCHAR(10),
 OrderNo 			INT,
 RequestNo			INT,
 ProblemTypeNo		INT,
-ScheduleNo		           INT,
+ScheduleNo		    INT,
 LogID				INT,
 CONSTRAINT Maintenance_PK PRIMARY KEY (MaintenanceNo),
 CONSTRAINT Maintenance_FK1 FOREIGN KEY(OrderNo) REFERENCES  MaintenanceOrder (OrderNo),
