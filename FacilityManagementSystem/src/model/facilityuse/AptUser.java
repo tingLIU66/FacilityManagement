@@ -1,5 +1,7 @@
 package model.facilityuse;
 
-public class AptUser {
+public class AptUser 
+{
+	
 
 }

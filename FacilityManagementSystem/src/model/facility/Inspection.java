@@ -1,5 +1,7 @@
 package model.facility;
 
-public class Inspection {
+public class Inspection 
+{
+	
 
 }
