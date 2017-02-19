@@ -9,7 +9,7 @@ public class Schedule {
 	private int scheduleNo;
 	private Date scheduleDate;	
 	private Staff staff;
-	private MaintenanceRequest maintrequest;
+	//private MaintenanceRequest maintrequest;
 	
 	
 	public void setScheduleNo(int scheduleNo){
@@ -36,13 +36,13 @@ public class Schedule {
 		return staff;
 	}
 	
-	public void setMaintenanceRequest(MaintenanceRequest maintrequest){
-		this.maintrequest = maintrequest;
-	}
+	//public void setMaintenanceRequest(MaintenanceRequest maintrequest){
+		//this.maintrequest = maintrequest;
+	//}
     
-	public MaintenanceRequest getMaintenanceRequest(){
-		return maintrequest;
-	}
+	//public MaintenanceRequest getMaintenanceRequest(){
+		//return maintrequest;
+	//}
 	
 	
 }

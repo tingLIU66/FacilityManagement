@@ -93,6 +93,7 @@ CREATE TABLE IF NOT EXISTS MaintenanceOrder
 OrderDate           TIMESTAMP,
 ScheduleNo 			INT,
 OrderStatus			VARCHAR(20),
+FinishedDate        DATE,
 CostNo 			    INT,
 CONSTRAINT MaintenanceOrder_PK PRIMARY KEY (OrderNo),
 CONSTRAINT MaintenanceOrder_FK1 FOREIGN KEY(CostNo) REFERENCES Cost (CostNo),
@@ -107,10 +108,11 @@ CONSTRAINT Log_PK PRIMARY KEY (LogID));
 CREATE TABLE IF NOT EXISTS Maintenance  
 (MaintenanceNo           INT NOT NULL AUTO_INCREMENT,
 ApartmentID 			VARCHAR(10),
-OrderNo 			INT,
+UnitNo 			    VARCHAR(10),
 RequestNo			INT,
-ProblemTypeNo		INT,
 ScheduleNo		    INT,
+OrderNo 			INT,
+ProblemTypeNo		INT,
 LogID				INT,
 CONSTRAINT Maintenance_PK PRIMARY KEY (MaintenanceNo),
 CONSTRAINT Maintenance_FK1 FOREIGN KEY(OrderNo) REFERENCES  MaintenanceOrder (OrderNo),
@@ -147,3 +149,5 @@ INSERT INTO facilityproblem(`ProblemType`) VALUES('Interior');
 INSERT INTO facilityproblem(`ProblemType`) VALUES('Exterior');
 
 INSERT INTO maintenancerequest(`RequestDate`,`ProblemTypeNo`,`ProblemDescription`,`UserName`) VALUES(CURRENT_DATE, 1, 'Bathroom toilit leaking','Ting Liu');
+
+INSERT INTO maintenance(`ApartmentID`,`UnitNo`,`RequestNo`) VALUES('APT001', '1A', 1);

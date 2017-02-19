@@ -8,6 +8,7 @@ public class MaintenanceOrder {
 	private Date orderDate;	
 	private Schedule schedule;
 	private String orderStatus;	
+	private Date finishedDate;
 	private Cost cost;
 	
 	
@@ -43,6 +44,13 @@ public class MaintenanceOrder {
 		return orderStatus;
 	}
 	
+	public void setFinishedDate(Date finishedDate){
+		this.finishedDate = finishedDate;
+	}
+    
+	public Date getFinishedDate(){
+		return finishedDate;
+	}
 	
 	public void setCost(Cost cost){
 		this.cost = cost;
