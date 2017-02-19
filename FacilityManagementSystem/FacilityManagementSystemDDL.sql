@@ -149,5 +149,8 @@ INSERT INTO facilityproblem(`ProblemType`) VALUES('Interior');
 INSERT INTO facilityproblem(`ProblemType`) VALUES('Exterior');
 
 INSERT INTO maintenancerequest(`RequestDate`,`ProblemTypeNo`,`ProblemDescription`,`UserName`) VALUES(CURRENT_DATE, 1, 'Bathroom toilit leaking','Ting Liu');
+INSERT INTO maintenancerequest(`RequestDate`,`ProblemTypeNo`,`ProblemDescription`,`UserName`) VALUES(CURRENT_DATE, 1, 'Kitchen faucet leaking','Ting Liu');
+INSERT INTO maintenancerequest(`RequestDate`,`ProblemTypeNo`,`ProblemDescription`,`UserName`) VALUES(CURRENT_DATE, 2, 'Refrirator doesn't work','Ting Liu');
+INSERT INTO maintenancerequest(`RequestDate`,`ProblemTypeNo`,`ProblemDescription`,`UserName`) VALUES(CURRENT_DATE, 3, 'Found mould on ceiling','Ting Liu');
 
 INSERT INTO maintenance(`ApartmentID`,`UnitNo`,`RequestNo`) VALUES('APT001', '1A', 1);

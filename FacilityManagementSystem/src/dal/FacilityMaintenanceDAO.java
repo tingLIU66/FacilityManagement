@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -139,10 +140,7 @@ public class FacilityMaintenanceDAO extends DBoperate{
 		return schedule;		
 			
 	}
-	
-	
-	
-	
+
 	public Set<MaintenanceRequest> listMaintRequests(){
 		Set<MaintenanceRequest> requests = new HashSet<MaintenanceRequest>();
 		String getquery = "SELECT * FROM `MaintenanceRequest`;";
@@ -244,10 +242,46 @@ public class FacilityMaintenanceDAO extends DBoperate{
 		return maintenances;	
 		
 	}
+
+	/**
+	 * Rank the problem reported from all requests in database and store problems and the times they're reported into a hashmap
+	 * @return
+	 */
+	 public HashMap<String,Integer> listFacilityProblems() {
+		 
+		 HashMap<String,Integer> problemrank = new HashMap<>();
+		 String getquery = "SELECT ProblemType£¬COUNT(maintenancerequest.`ProblemTypeNo`) FROM `maintenancerequest`,facilityproblem"
+				          + "WHERE maintenancerequest.ProblemTypeNo=facilityproblem.ProblemTypeNo GROUP BY maintenancerequest.ProblemTypeNo;";
+		 Connection connection = super.getConnection();
+			Statement stmt = null;
+			
+			try {
+				stmt = connection.createStatement();
+				PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(getquery);
+				ResultSet rs = preStatement.executeQuery();
+				
+
+				while (rs.next()) {
+					    for (int i = 1; i < rs.getMetaData().getColumnCount() + 1; i++) {		            	
+		            	problemrank.put(rs.getString(1), rs.getInt(2));	  			
+		            	
+		            }
+		        }
+
+				stmt.close();
+				rs.close();
+
+			} catch (SQLException e) {
+				System.out.println(e.toString());
+			}
+
+			super.closeConnection(connection);
+
+			return problemrank;	
+	 }
 	
-	 public object listFacilityProblems(String apartmentID) {
+	 public object calcMaintenanceCostForFacility(){
 		 
 		 
 	 }
-	
 }
