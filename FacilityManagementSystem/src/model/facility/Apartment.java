@@ -49,5 +49,7 @@ public class Apartment {
     	return facilitydao.addFacilityDetail(apartmentID, facilitydetail);
     	
     }
+    
+  
 
 }

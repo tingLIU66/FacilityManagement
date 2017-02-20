@@ -131,7 +131,7 @@ public int requestAvailableCapacity(String apartmentID) {
  */
 public String addFacilityDetail(String apartmentID, FacilityDetail facilitydetail) {
 	
-	String addquery = "INSERT INTO FacilityDetail(`Address`,`Zipcode`,`Age`,`Capatity`,`Parking`,`ApartmentID`) VALUES('?,?,?,?,?,?');";
+	String addquery = "INSERT INTO FacilityDetail(`Address`,`Zipcode`,`Age`,`Capatity`,`Parking`,`ApartmentID`) VALUES(?,?,?,?,?,?);";
 	Connection connection = super.getConnection();
 	Statement stmt = null;
 	
@@ -156,6 +156,7 @@ public String addFacilityDetail(String apartmentID, FacilityDetail facilitydetai
 	super.closeConnection(connection);
 	
 	return "Adding facilityDetail successfully!";
+	
 	
 }
 
@@ -200,6 +201,7 @@ public Apartment addNewFacility(String apartmentID, String name){
 	super.closeConnection(connection);
 	return apartment;
 }
+
 
 /**
  * Delete a specific apartment

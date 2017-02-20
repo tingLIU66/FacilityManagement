@@ -26,6 +26,7 @@ UnitStatus 			VARCHAR(20),
 ApartmentID 			VARCHAR(10),
 CONSTRAINT Unit_PK PRIMARY KEY (UnitNo, ApartmentID));
 
+
 CREATE TABLE IF NOT EXISTS Admin
 (AdminName 			VARCHAR(20) NOT NULL,
 AdminLocation 		VARCHAR(50),

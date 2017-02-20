@@ -13,8 +13,8 @@ public class FacilityClient {
 	
 	public static void main(String args[]) throws Exception {
 
-	//Client will use the customer service to have access to anything related to customer functionality.
-		Scanner sc = new Scanner(System.in);
+	//Client will use the facility client to access to anything related to facility functionality.
+	Scanner sc = new Scanner(System.in);
     System.out.println("*************** Creating Facility related objects *************************");
     FacilityAdmin fadmin = new FacilityAdmin(); 
     Apartment apt = new Apartment();
@@ -56,12 +56,36 @@ public class FacilityClient {
 	System.out.println("Aartment( " + addaptid + ", " + name + ")added successfully!");
 	System.out.println();
 	
+	
+	
 	System.out.println("*************** Remove a new Facility to manage *****************************");
 	System.out.println("Input apartmentID you want you remove:"); 
 	String delaptid = sc.next();
 	System.out.println(fadmin.removeFacility(delaptid));	
+	System.out.println();
 	
+	System.out.println("***************Request the number of units available in a specific apartment*****************************");
+	System.out.println("Input apartmentID:");
+	String raptID = sc.next();
+	int unitavb = apt.requestAvailableCapacity(raptID);
+	System.out.println("Apartment " + raptID + " has " + unitavb + " units available");
+	System.out.println();
 	
+	System.out.println("***************Add detail to a new added apartment*****************************");
+	System.out.println("Input apartmentID:");
+	String adaptID = sc.next();
+	//Initiate a facilitydetail
+	FacilityDetail fdet = new FacilityDetail();
+	fdet.setAdress("601 W Jackson Blvd, Chicago, IL");
+	fdet.setAge(10);
+	fdet.setCapacity(135);
+	fdet.setParking("Yes");
+	fdet.setZipcode("60661");
+	
+    System.out.println("============================================================================");   
+	System.out.println(apt.addFacilityDetail(adaptID, fdet));
+	
+	System.out.println();
 }		
 	
 }
