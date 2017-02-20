@@ -2,9 +2,10 @@ package model.facility;
 
 public class Staff 
 {
+	private int staffID;
 	private String staffLname;
 	private String staffFname;
-	private int staffID;
+	private String specialty;
 	
 	
 	public void setstaffLname(String staffLname){
@@ -31,6 +32,12 @@ public class Staff
 		return staffID;
 	}
 	
-
+	public void setSpecialty(String specialty){
+		this.specialty = specialty;
+	}
+    
+	public String getSpecialty(){
+		return specialty;
+	}
 
 }

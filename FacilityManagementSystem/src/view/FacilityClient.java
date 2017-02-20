@@ -26,10 +26,10 @@ public class FacilityClient {
 	       
 	Iterator<Apartment> it = apartments.iterator();
 	while(it.hasNext()) {
-		Apartment pdt = (Apartment) it.next();
+		Apartment apt1 = (Apartment) it.next();
 		
-		System.out.println("ApartmentID: " + pdt.getApartmentID());
-		System.out.println("ApartmentName: " + pdt.getName());
+		System.out.println("ApartmentID: " + apt1.getApartmentID());
+		System.out.println("ApartmentName: " + apt1.getName());
 		System.out.println();
 	}
 	

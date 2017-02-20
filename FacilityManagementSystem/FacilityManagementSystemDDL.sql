@@ -36,7 +36,6 @@ CREATE TABLE IF NOT EXISTS Staff
 (StaffID 			INT NOT NULL AUTO_INCREMENT,
 Lname 			VARCHAR(20),
 Fname 			VARCHAR(20),
-PhoneNo			VARCHAR(20),
 SpecialtyDescription 		VARCHAR(20),
 AdminName 			VARCHAR(20),
 CONSTRAINT Staff_PK PRIMARY KEY (StaffID),
@@ -150,9 +149,9 @@ INSERT INTO facilityproblem(`ProblemType`) VALUES('Exterior');
 
 INSERT INTO admin(`AdminName`,`AdminLocation`,`AdminPhoneNo`) VALUES('ChicagoAdmin','Chicago','844-000-1275');
 
-INSERT INTO staff(`Lname`,`Fname`,`PhoneNo`,`SpecialtyDescription`,`AdminName`) VALUES('Steven','White','3128889900','Plumbing','ChicagoAdmin');
-INSERT INTO staff(`Lname`,`Fname`,`PhoneNo`,`SpecialtyDescription`,`AdminName`) VALUES('Kevin','Clain','3127789901','Electricity','ChicagoAdmin');
-INSERT INTO staff(`Lname`,`Fname`,`PhoneNo`,`SpecialtyDescription`,`AdminName`) VALUES('Mark','Zac','3128859950','Interior','ChicagoAdmin');
+INSERT INTO staff(`Lname`,`Fname`,`SpecialtyDescription`,`AdminName`) VALUES('Steven','White','Plumbing','ChicagoAdmin');
+INSERT INTO staff(`Lname`,`Fname`,`SpecialtyDescription`,`AdminName`) VALUES('Kevin','Clain','Electricity','ChicagoAdmin');
+INSERT INTO staff(`Lname`,`Fname`,`SpecialtyDescription`,`AdminName`) VALUES('Mark','Zac','Interior','ChicagoAdmin');
 
 INSERT INTO maintenancerequest(`RequestDate`,`ProblemTypeNo`,`ProblemDescription`,`UserName`) VALUES('2016-12-01', 1, 'Bathroom toilit leaking','Ting Liu');
 INSERT INTO maintenancerequest(`RequestDate`,`ProblemTypeNo`,`ProblemDescription`,`UserName`) VALUES('2016-03-23', 1, 'Kitchen faucet leaking','James Wang');
@@ -185,4 +184,5 @@ INSERT INTO maintenance(`ApartmentID`,`UnitNo`,`RequestNo`,`ScheduleNo`,`OrderNo
 INSERT INTO maintenance(`ApartmentID`,`UnitNo`,`RequestNo`,`ScheduleNo`,`OrderNo`,`ProblemTypeNo`) VALUES('APT001','1A',4,4,4,3);
 INSERT INTO maintenance(`ApartmentID`,`UnitNo`,`RequestNo`,`ScheduleNo`,`OrderNo`,`ProblemTypeNo`) VALUES('APT003','1001',5,5,5,1);
 
-
+-- Set requestDate to CURRENT_DATE
+ALTER TABLE maintenancerequest MODIFY `RequestDate`  TIMESTAMP;

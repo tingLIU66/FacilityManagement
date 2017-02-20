@@ -54,23 +54,28 @@ public class FacilityMaintenanceDAO extends DBoperate{
 		
 		try {
 			stmt = connection.createStatement();
-
-			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(addquery);
+		
+			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(addquery, Statement.RETURN_GENERATED_KEYS);
 			preStatement.setInt(1, problemtypeNo);
 			preStatement.setString(2, pdescription);
-			preStatement.setString(3, aptuser.getUserName());
-			preStatement.setInt(4, problemtypeNo);
+			preStatement.setString(3, aptuser.getUserName());			
 
 			preStatement.executeUpdate();
 			
 			//get the auto generated RequestNo first and then get all the maintenancerequest info
 			ResultSet rs = preStatement.getGeneratedKeys();
+			if(rs.next()){
 			requestNo = rs.getInt(1);
+			}
+			
+			System.out.println("id:"+requestNo);
 		   //Insert a record into maintenance table once a request created	
 			PreparedStatement preStatement1 = (PreparedStatement) connection.prepareStatement(addmaintrecordquery);
 			preStatement1.setString(1, aptuser.getApartmentID());
 			preStatement1.setString(2, aptuser.getUnitNo());
 			preStatement1.setInt(3, requestNo);
+			preStatement1.setInt(4, problemtypeNo);
+			
 			preStatement1.executeUpdate();
 		
 			PreparedStatement preStatement2 = (PreparedStatement) connection.prepareStatement(selectquery);
@@ -80,8 +85,8 @@ public class FacilityMaintenanceDAO extends DBoperate{
 			if(rs1.next()){
 				maintrequest.setRequestNo(requestNo);;
 				maintrequest.setRequestDate(rs1.getDate(2));
-				maintrequest.setProblemTypeNo(rs.getInt(3));
-				maintrequest.setProblemDescriptin(rs.getString(4));
+				maintrequest.setProblemTypeNo(rs1.getInt(3));
+				maintrequest.setProblemDescriptin(rs1.getString(4));
 				maintrequest.setAptUser(aptuser);
 			}
 			
@@ -117,7 +122,7 @@ public class FacilityMaintenanceDAO extends DBoperate{
 		try {
 			stmt = connection.createStatement();
 
-			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(addquery);
+			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(addquery,Statement.RETURN_GENERATED_KEYS);
 			preStatement.setDate(1, sdate);
 			preStatement.setInt(2, staff.getstaffID());
 
@@ -125,8 +130,9 @@ public class FacilityMaintenanceDAO extends DBoperate{
 			
 			//get the auto generated RequestNo first and then get all the schedule info
 			ResultSet rs = preStatement.getGeneratedKeys();
+			if(rs.next()){
 			scheduleNo = rs.getInt(1);
-			
+			}
 			//Update scheduleNo into maintenance table once schedule a maintenance
 			PreparedStatement preStatement1 = (PreparedStatement) connection.prepareStatement(updatemaintrecordquery);
 			preStatement1.setInt(1, scheduleNo);
@@ -139,7 +145,7 @@ public class FacilityMaintenanceDAO extends DBoperate{
 			
 			if(rs1.next()){
 				schedule.setScheduleNo(scheduleNo);
-				schedule.setScheduleDate(rs.getDate(2));
+				schedule.setScheduleDate(rs1.getDate(2));
 				schedule.setStaff(staff);
 				
 			}
@@ -174,7 +180,7 @@ public class FacilityMaintenanceDAO extends DBoperate{
 
 			while (rs.next()) {
 				MaintenanceRequest request = new MaintenanceRequest();
-	            for (int i = 1; i < rs.getMetaData().getColumnCount() + 1; i++) {
+	          
 	            	AptUser aptuser = new AptUser();
 	            	
 	            	//aptuser.setUserName(rs.getString(5));
@@ -187,19 +193,22 @@ public class FacilityMaintenanceDAO extends DBoperate{
 	    		
 	            //Get username from request table and then go to aptuser table to get other information	
 	            	PreparedStatement preStatement2 = (PreparedStatement) connection.prepareStatement(getuserquery);
-	    			preStatement.setString(1, rs.getString(5));
+	    			preStatement2.setString(1, rs.getString(5));
 	    			ResultSet rs2 = preStatement2.executeQuery();
+	    			
 	    		//set aptuser with the specific username	
+	    			if(rs2.next()){
 	    			aptuser.setUserName(rs2.getString(1));
 	    			aptuser.setPhoneNo(rs2.getString(2));
 	    			aptuser.setUnitNo(rs2.getString(3));
 	    			aptuser.setApartmentID(rs2.getString(4));
+	    			}
 	    		//set the attribute AptUser of request	
 	    			request.setAptUser(aptuser);
 	    			
 	    			requests.add(request);
 	            }
-	        }
+	        
 
 			stmt.close();
 			rs.close();
@@ -222,14 +231,16 @@ public class FacilityMaintenanceDAO extends DBoperate{
 	 */
 	public Set<Maintenance> listMaintenance(String apartmentID){
 		Set<Maintenance> maintenances = new HashSet<Maintenance>();
-		String getquery = "SELECT(`MaintenanceNo`, `ApartmentID`,`UnitNo`,`RequestDate`,`ProblemType`, `Lname`,`Fname`,`FinishedDate`)" 
-                          + "FROM maintenance, maintenancerequest, `schedule`, maintenanceorder, staff, facilityproblem"
-                          + "WHERE maintenance.RequestNo=maintenancerequest.RequestNo"
-                          + "AND maintenance.ScheduleNo=`schedule`.ScheduleNo"
-                          + "AND maintenance.ProblemTypeNo=facilityproblem.ProblemTypeNo"
-                          + "AND `schedule`.StaffID = staff.StaffID"
-                          + "AND maintenance.OrderNo = maintenanceorder.OrderNo"
-                          + "AND ApartmentID=?";
+	
+		String getquery = "SELECT `MaintenanceNo`, `ApartmentID`,`UnitNo`,`RequestDate`,`ProblemType`, `Lname`,`Fname`,`FinishedDate` "
+						+ "FROM maintenance, maintenancerequest, `schedule`, maintenanceorder, staff, facilityproblem "
+						+ "WHERE maintenance.RequestNo=maintenancerequest.RequestNo "
+						+ "AND maintenance.ScheduleNo=`schedule`.ScheduleNo "
+						+ "AND maintenance.ProblemTypeNo=facilityproblem.ProblemTypeNo "
+						+ "AND `schedule`.StaffID = staff.StaffID "
+						+ "AND maintenance.OrderNo = maintenanceorder.OrderNo "
+						+ "AND ApartmentID=?";
+		
 		Connection connection = super.getConnection();
 		Statement stmt = null;
 		
@@ -242,8 +253,7 @@ public class FacilityMaintenanceDAO extends DBoperate{
 
 			while (rs.next()) {
 				Maintenance maintenance = new Maintenance();
-	            for (int i = 1; i < rs.getMetaData().getColumnCount() + 1; i++) {
-	           	            	
+	         	           	            	
 	                maintenance.setMaintenanceNo(rs.getInt(1));			
 	            	maintenance.setApartmentID(rs.getString(2));
 	            	maintenance.setUnitNo(rs.getString(3));
@@ -253,7 +263,7 @@ public class FacilityMaintenanceDAO extends DBoperate{
 	            	maintenance.setFinisheddate(rs.getDate(8));
 	                    	
      	           	maintenances.add(maintenance);
-	            }
+	            
 	        }
 			stmt.close();
 			rs.close();
@@ -273,9 +283,11 @@ public class FacilityMaintenanceDAO extends DBoperate{
 	 public HashMap<String,Integer> listFacilityProblems(String apartmentID) {
 		 
 		 HashMap<String,Integer> problemrank = new HashMap<>();
-		 String getquery = "SELECT ProblemType.COUNT(maintenancerequest.`ProblemTypeNo`) FROM `maintenancerequest`,facilityproblem"
-				          + " WHERE maintenancerequest.ProblemTypeNo=facilityproblem.ProblemTypeNo GROUP BY maintenancerequest.ProblemTypeNo"
-				          + " AND apartmentID= ?;";
+		 String getquery = "SELECT facilityproblem.ProblemType, COUNT(maintenance.ProblemTypeNo) "
+		 					+ "FROM `maintenance`,facilityproblem "
+		 					+ "WHERE maintenance.ProblemTypeNo=facilityproblem.ProblemTypeNo "
+		 					+ "AND apartmentID = ?"
+		 					+ "GROUP BY maintenance.ProblemTypeNo";
 		 Connection connection = super.getConnection();
 			Statement stmt = null;
 			
