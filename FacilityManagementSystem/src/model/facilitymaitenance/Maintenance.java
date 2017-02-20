@@ -1,6 +1,12 @@
 package model.facilitymaitenance;
 
 import java.sql.Date;
+import java.util.HashMap;
+import java.util.Set;
+
+import dal.FacilityMaintenanceDAO;
+import model.facility.Staff;
+import model.facilityuse.AptUser;
 
 public class Maintenance {
 	
@@ -20,6 +26,8 @@ public class Maintenance {
 	private String problemType;
 	private String maintenanceTechnician;
 	private Date finisheddate;
+	
+	FacilityMaintenanceDAO mdao = new FacilityMaintenanceDAO();
 	
 	public void setMaintenanceNo(int maintenanceNo){
 		this.maintenanceNo = maintenanceNo;
@@ -80,10 +88,32 @@ public class Maintenance {
 	}
 	
 	
-	public MaintenanceRequest makeFacilityMaintRequest(){
-		return null;
-		
-		
+	public MaintenanceRequest makeFacilityMaintRequest(int problemtypeNo, String pdescription, AptUser aptuser){
+		return mdao.makeFacilityMaintRequest(problemtypeNo, pdescription, aptuser);
+			
 	}
+	
+	 public Cost calcMaintenanceCostForFacility(String apartmentID){
+		 return mdao.calcMaintenanceCostForFacility(apartmentID);
+	 }
+	 
+	 public float calcProblemRateForFacility(String apartmentID){
+		 return mdao.calcProblemRateForFacility(apartmentID);
+	 }
+	 
+	 public HashMap<String,Integer> listFacilityProblems(String apartmentID) {
+		 return mdao.listFacilityProblems(apartmentID);
+	 }
 
+	 public Set<Maintenance> listMaintenance(String apartmentID){
+		 return mdao.listMaintenance(apartmentID);
+	 }
+	 
+	 public Set<MaintenanceRequest> listMaintRequests(){
+		 return mdao.listMaintRequests();
+	 }
+	 
+	 public Schedule scheduleMaintenance(int maintenanceNo, Date sdate, Staff staff ){
+		 return mdao.scheduleMaintenance(maintenanceNo, sdate, staff);
+	 }
 }

@@ -273,9 +273,9 @@ public class FacilityMaintenanceDAO extends DBoperate{
 	 public HashMap<String,Integer> listFacilityProblems(String apartmentID) {
 		 
 		 HashMap<String,Integer> problemrank = new HashMap<>();
-		 String getquery = "SELECT ProblemType£¬COUNT(maintenancerequest.`ProblemTypeNo`) FROM `maintenancerequest`,facilityproblem"
-				          + "WHERE maintenancerequest.ProblemTypeNo=facilityproblem.ProblemTypeNo GROUP BY maintenancerequest.ProblemTypeNo"
-				          + "AND apartmentID= ?;";
+		 String getquery = "SELECT ProblemType.COUNT(maintenancerequest.`ProblemTypeNo`) FROM `maintenancerequest`,facilityproblem"
+				          + " WHERE maintenancerequest.ProblemTypeNo=facilityproblem.ProblemTypeNo GROUP BY maintenancerequest.ProblemTypeNo"
+				          + " AND apartmentID= ?;";
 		 Connection connection = super.getConnection();
 			Statement stmt = null;
 			
@@ -313,11 +313,11 @@ public class FacilityMaintenanceDAO extends DBoperate{
 	 public float calcProblemRateForFacility(String apartmentID){
 		 float problemrate = 0;
 		 String getnumber = "SELECT COUNT(`MaintenanceNo`)" 
-				 			+"FROM `maintenanceorder`, maintenance"
-				 			+"WHERE YEAR(`FinishedDate`) = 2016"
-				 			+"AND `OrderStatus`= 'Finished'"
-				 			+"AND apartmentID = ?"
-				 			+"AND maintenance.OrderNo = maintenanceorder.OrderNo";
+				 			+" FROM `maintenanceorder`, maintenance"
+				 			+" WHERE YEAR(`FinishedDate`) = 2016"
+				 			+" AND `OrderStatus`= 'Finished'"
+				 			+" AND apartmentID = ?"
+				 			+" AND maintenance.OrderNo = maintenanceorder.OrderNo";
 		 
 		 Connection connection = super.getConnection();
 			Statement stmt = null;
@@ -330,7 +330,7 @@ public class FacilityMaintenanceDAO extends DBoperate{
 				
 
 				if (rs.next()) {
-					    problemrate = rs.getFloat(1);			            	
+					    problemrate = rs.getFloat(1)/12;			            	
 		            }
 		     
 				stmt.close();
@@ -347,11 +347,12 @@ public class FacilityMaintenanceDAO extends DBoperate{
 	
 	 public Cost calcMaintenanceCostForFacility(String apartmentID){
 		 Cost cost = new Cost();
-		 String getcostquery = "SELECT SUM(`LaborCost`),SUM(`MaterialCost`) FROM maintenance, maintenanceorder,cost"
-				 				+"WHERE maintenance.OrderNo = maintenanceorder.OrderNo"
-				 				+"AND maintenanceorder.CostNo = cost.CostNo"
-				 				+"AND YEAR(maintenanceorder.FinishedDate) = 2016"
-				 				+"AND apartmentID =?;";
+		 
+		 String getcostquery = "SELECT SUM(`LaborCost`),SUM(`MaterialCost`) FROM maintenance, maintenanceorder,cost "
+		 						+ "WHERE maintenance.OrderNo = maintenanceorder.OrderNo "
+		 						+ "AND maintenanceorder.CostNo = cost.CostNo "
+		 						+ "AND YEAR(maintenanceorder.FinishedDate) = 2016 "
+		 						+ "AND apartmentID =?";
 		 
 		 Connection connection = super.getConnection();
 			Statement stmt = null;

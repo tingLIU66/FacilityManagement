@@ -44,17 +44,7 @@ public class DBoperate {
 					} catch (SQLException ignore) {
 					}
 				}
-				
-			
-		
-		
-		
-		
-		
+	
 		}
-	
-
-	
-	
 
 }

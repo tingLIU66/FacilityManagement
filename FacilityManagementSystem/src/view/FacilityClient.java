@@ -10,9 +10,6 @@ import model.facility.FacilityAdmin;
 import model.facility.FacilityDetail;
 
 public class FacilityClient {
-	//public static void main (String args[]) throws Exception {
-	
-	
 	
 	public static void main(String args[]) throws Exception {
 
