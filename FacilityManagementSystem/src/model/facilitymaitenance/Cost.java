@@ -32,8 +32,12 @@ public class Cost {
 	public float getMaterialCost(){
 		return materialCost;
 	}
+	
+	public void setTotal(){
+		this.total = laborCost + materialCost;
+	}
 	    
 	public float getTotal(){
-		return laborCost + materialCost;
+		return total;
 	}
 }

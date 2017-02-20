@@ -12,6 +12,7 @@ import java.util.Set;
 
 import model.facility.Apartment;
 import model.facility.Staff;
+import model.facilitymaitenance.Cost;
 import model.facilitymaitenance.Maintenance;
 import model.facilitymaitenance.MaintenanceRequest;
 import model.facilitymaitenance.Schedule;
@@ -30,7 +31,14 @@ public class FacilityMaintenanceDAO extends DBoperate{
 	public FacilityMaintenanceDAO(){
 			super();
 	}
-	
+
+	/**
+	 * 
+	 * @param problemtypeNo
+	 * @param pdescription
+	 * @param aptuser
+	 * @return
+	 */
 	public MaintenanceRequest makeFacilityMaintRequest(int problemtypeNo, String pdescription, AptUser aptuser){
 		
 		int requestNo = 0;
@@ -88,7 +96,13 @@ public class FacilityMaintenanceDAO extends DBoperate{
 		
 	}
 	
-	
+	/**
+	 * 
+	 * @param maintenanceNo
+	 * @param sdate
+	 * @param staff
+	 * @return
+	 */
 	public Schedule scheduleMaintenance(int maintenanceNo, Date sdate, Staff staff ){
 		
 		int scheduleNo = 0;
@@ -141,6 +155,10 @@ public class FacilityMaintenanceDAO extends DBoperate{
 			
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public Set<MaintenanceRequest> listMaintRequests(){
 		Set<MaintenanceRequest> requests = new HashSet<MaintenanceRequest>();
 		String getquery = "SELECT * FROM `MaintenanceRequest`;";
@@ -197,6 +215,11 @@ public class FacilityMaintenanceDAO extends DBoperate{
 		
 	}
 	
+	/**
+	 * 
+	 * @param apartmentID
+	 * @return
+	 */
 	public Set<Maintenance> listMaintenance(String apartmentID){
 		Set<Maintenance> maintenances = new HashSet<Maintenance>();
 		String getquery = "SELECT(`MaintenanceNo`, `ApartmentID`,`UnitNo`,`RequestDate`,`ProblemType`, `Lname`,`Fname`,`FinishedDate`)" 
@@ -247,17 +270,19 @@ public class FacilityMaintenanceDAO extends DBoperate{
 	 * Rank the problem reported from all requests in database and store problems and the times they're reported into a hashmap
 	 * @return
 	 */
-	 public HashMap<String,Integer> listFacilityProblems() {
+	 public HashMap<String,Integer> listFacilityProblems(String apartmentID) {
 		 
 		 HashMap<String,Integer> problemrank = new HashMap<>();
 		 String getquery = "SELECT ProblemType£¬COUNT(maintenancerequest.`ProblemTypeNo`) FROM `maintenancerequest`,facilityproblem"
-				          + "WHERE maintenancerequest.ProblemTypeNo=facilityproblem.ProblemTypeNo GROUP BY maintenancerequest.ProblemTypeNo;";
+				          + "WHERE maintenancerequest.ProblemTypeNo=facilityproblem.ProblemTypeNo GROUP BY maintenancerequest.ProblemTypeNo"
+				          + "AND apartmentID= ?;";
 		 Connection connection = super.getConnection();
 			Statement stmt = null;
 			
 			try {
 				stmt = connection.createStatement();
 				PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(getquery);
+				preStatement.setString(1, apartmentID);
 				ResultSet rs = preStatement.executeQuery();
 				
 
@@ -279,9 +304,80 @@ public class FacilityMaintenanceDAO extends DBoperate{
 
 			return problemrank;	
 	 }
+
+	 /**
+	  * 
+	  * @param apartmentID
+	  * @return
+	  */
+	 public float calcProblemRateForFacility(String apartmentID){
+		 float problemrate = 0;
+		 String getnumber = "SELECT COUNT(`MaintenanceNo`)" 
+				 			+"FROM `maintenanceorder`, maintenance"
+				 			+"WHERE YEAR(`FinishedDate`) = 2016"
+				 			+"AND `OrderStatus`= 'Finished'"
+				 			+"AND apartmentID = ?"
+				 			+"AND maintenance.OrderNo = maintenanceorder.OrderNo";
+		 
+		 Connection connection = super.getConnection();
+			Statement stmt = null;
+			
+			try {
+				stmt = connection.createStatement();
+				PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(getnumber);
+				preStatement.setString(1, apartmentID);
+				ResultSet rs = preStatement.executeQuery();
+				
+
+				if (rs.next()) {
+					    problemrate = rs.getFloat(1);			            	
+		            }
+		     
+				stmt.close();
+				rs.close();
+
+			} catch (SQLException e) {
+				System.out.println(e.toString());
+			}
+			super.closeConnection(connection);
+		 
+		return problemrate;
+	 
+	 }
 	
-	 public Float calcMaintenanceCostForFacility(String apartmentID){
-		return null;
+	 public Cost calcMaintenanceCostForFacility(String apartmentID){
+		 Cost cost = new Cost();
+		 String getcostquery = "SELECT SUM(`LaborCost`),SUM(`MaterialCost`) FROM maintenance, maintenanceorder,cost"
+				 				+"WHERE maintenance.OrderNo = maintenanceorder.OrderNo"
+				 				+"AND maintenanceorder.CostNo = cost.CostNo"
+				 				+"AND YEAR(maintenanceorder.FinishedDate) = 2016"
+				 				+"AND apartmentID =?;";
+		 
+		 Connection connection = super.getConnection();
+			Statement stmt = null;
+			
+			try {
+				stmt = connection.createStatement();
+				PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(getcostquery);
+				preStatement.setString(1, apartmentID);
+				ResultSet rs = preStatement.executeQuery();
+				
+
+				if (rs.next()) {
+					   cost.setLaborCost(rs.getFloat(1));  
+					   cost.setMaterialCost(rs.getFloat(2));
+					   cost.setTotal();
+		            }
+		     
+				stmt.close();
+				rs.close();
+
+			} catch (SQLException e) {
+				System.out.println(e.toString());
+			}
+			super.closeConnection(connection);
+		 
+		 return cost;
 		 
 		 
 	 }
