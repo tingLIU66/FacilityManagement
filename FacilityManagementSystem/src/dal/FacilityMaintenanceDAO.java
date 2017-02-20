@@ -60,8 +60,8 @@ public class FacilityMaintenanceDAO extends DBoperate{
 			requestNo = rs.getInt(1);
 		   //Insert a record into maintenance table once a request created	
 			PreparedStatement preStatement1 = (PreparedStatement) connection.prepareStatement(addmaintrecordquery);
-			preStatement1.setString(1, aptUser.getApartmentID());
-			preStatement1.setString(2, aptUser.getUnitNo());
+			preStatement1.setString(1, aptuser.getApartmentID());
+			preStatement1.setString(2, aptuser.getUnitNo());
 			preStatement1.setInt(3, requestNo);
 			preStatement1.executeUpdate();
 		
@@ -105,7 +105,7 @@ public class FacilityMaintenanceDAO extends DBoperate{
 
 			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(addquery);
 			preStatement.setDate(1, sdate);
-			preStatement.setInt(2, staff.getStaffID());
+			preStatement.setInt(2, staff.getstaffID());
 
 			preStatement.executeUpdate();
 			
@@ -172,7 +172,7 @@ public class FacilityMaintenanceDAO extends DBoperate{
 	    			preStatement.setString(1, rs.getString(5));
 	    			ResultSet rs2 = preStatement2.executeQuery();
 	    		//set aptuser with the specific username	
-	    			aptuser.setUserName(rs2.getString(1);
+	    			aptuser.setUserName(rs2.getString(1));
 	    			aptuser.setPhoneNo(rs2.getString(2));
 	    			aptuser.setUnitNo(rs2.getString(3));
 	    			aptuser.setApartmentID(rs2.getString(4));
@@ -280,7 +280,8 @@ public class FacilityMaintenanceDAO extends DBoperate{
 			return problemrank;	
 	 }
 	
-	 public object calcMaintenanceCostForFacility(){
+	 public Float calcMaintenanceCostForFacility(String apartmentID){
+		return null;
 		 
 		 
 	 }

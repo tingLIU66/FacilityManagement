@@ -81,23 +81,20 @@ CONSTRAINT Cost_PK PRIMARY KEY (CostNo));
 
 CREATE TABLE IF NOT EXISTS Schedule
 (ScheduleNo 			INT NOT NULL AUTO_INCREMENT,
-RequestNo 			    INT,
 ScheduleDate            DATE,
 StaffID 			    INT,
 CONSTRAINT Schedule_PK PRIMARY KEY (ScheduleNo),
-CONSTRAINT Schedule_FK1 FOREIGN KEY(StaffID) REFERENCES  Staff (StaffID),
-CONSTRAINT Schedule_FK2 FOREIGN KEY(RequestNo) REFERENCES  MaintenanceRequest (RequestNo));
+CONSTRAINT Schedule_FK1 FOREIGN KEY(StaffID) REFERENCES  Staff (StaffID));
 
 CREATE TABLE IF NOT EXISTS MaintenanceOrder
 (OrderNo 			INT NOT NULL AUTO_INCREMENT,
 OrderDate           TIMESTAMP,
-ScheduleNo 			INT,
 OrderStatus			VARCHAR(20),
 FinishedDate        DATE,
 CostNo 			    INT,
 CONSTRAINT MaintenanceOrder_PK PRIMARY KEY (OrderNo),
-CONSTRAINT MaintenanceOrder_FK1 FOREIGN KEY(CostNo) REFERENCES Cost (CostNo),
-CONSTRAINT MaintenanceOrder_FK2 FOREIGN KEY(ScheduleNo) REFERENCES Schedule (ScheduleNo));
+CONSTRAINT MaintenanceOrder_FK1 FOREIGN KEY(CostNo) REFERENCES Cost (CostNo));
+
 
 CREATE TABLE IF NOT EXISTS Log
 (LogID			INT NOT NULL AUTO_INCREMENT,
@@ -142,15 +139,50 @@ INSERT INTO unit(`UnitNo`,`Bedroom`,`UnitStatus`,`ApartmentID`) VALUES('1002',2,
 INSERT INTO unit(`UnitNo`,`Bedroom`,`UnitStatus`,`ApartmentID`) VALUES('1003',3,'Available','APT003');
 
 INSERT INTO aptuser(`UserName`,`PhoneNo`,`UnitNo`,`ApartmentID`) VALUES('Ting Liu','3124446666','1A','APT001');
+INSERT INTO aptuser(`UserName`,`PhoneNo`,`UnitNo`,`ApartmentID`) VALUES('James Wang','3124446655','1B','APT001');
+INSERT INTO aptuser(`UserName`,`PhoneNo`,`UnitNo`,`ApartmentID`) VALUES('John Smith','3124345666','102','APT002');
+INSERT INTO aptuser(`UserName`,`PhoneNo`,`UnitNo`,`ApartmentID`) VALUES('David Zheng','3124369087','1001','APT003');
 
 INSERT INTO facilityproblem(`ProblemType`) VALUES('Plumbing');
 INSERT INTO facilityproblem(`ProblemType`) VALUES('Electronics and appliances');
 INSERT INTO facilityproblem(`ProblemType`) VALUES('Interior');
 INSERT INTO facilityproblem(`ProblemType`) VALUES('Exterior');
 
-INSERT INTO maintenancerequest(`RequestDate`,`ProblemTypeNo`,`ProblemDescription`,`UserName`) VALUES(CURRENT_DATE, 1, 'Bathroom toilit leaking','Ting Liu');
-INSERT INTO maintenancerequest(`RequestDate`,`ProblemTypeNo`,`ProblemDescription`,`UserName`) VALUES(CURRENT_DATE, 1, 'Kitchen faucet leaking','Ting Liu');
-INSERT INTO maintenancerequest(`RequestDate`,`ProblemTypeNo`,`ProblemDescription`,`UserName`) VALUES(CURRENT_DATE, 2, 'Refrirator doesn't work','Ting Liu');
-INSERT INTO maintenancerequest(`RequestDate`,`ProblemTypeNo`,`ProblemDescription`,`UserName`) VALUES(CURRENT_DATE, 3, 'Found mould on ceiling','Ting Liu');
+INSERT INTO admin(`AdminName`,`AdminLocation`,`AdminPhoneNo`) VALUES('ChicagoAdmin','Chicago','844-000-1275');
 
-INSERT INTO maintenance(`ApartmentID`,`UnitNo`,`RequestNo`) VALUES('APT001', '1A', 1);
+INSERT INTO staff(`Lname`,`Fname`,`PhoneNo`,`SpecialtyDescription`,`AdminName`) VALUES('Steven','White','3128889900','Plumbing','ChicagoAdmin');
+INSERT INTO staff(`Lname`,`Fname`,`PhoneNo`,`SpecialtyDescription`,`AdminName`) VALUES('Kevin','Clain','3127789901','Electricity','ChicagoAdmin');
+INSERT INTO staff(`Lname`,`Fname`,`PhoneNo`,`SpecialtyDescription`,`AdminName`) VALUES('Mark','Zac','3128859950','Interior','ChicagoAdmin');
+
+INSERT INTO maintenancerequest(`RequestDate`,`ProblemTypeNo`,`ProblemDescription`,`UserName`) VALUES('2016-12-01', 1, 'Bathroom toilit leaking','Ting Liu');
+INSERT INTO maintenancerequest(`RequestDate`,`ProblemTypeNo`,`ProblemDescription`,`UserName`) VALUES('2016-03-23', 1, 'Kitchen faucet leaking','James Wang');
+INSERT INTO maintenancerequest(`RequestDate`,`ProblemTypeNo`,`ProblemDescription`,`UserName`) VALUES('2016-07-12', 2, 'Refrirator doesn\'t work','John Smith');
+INSERT INTO maintenancerequest(`RequestDate`,`ProblemTypeNo`,`ProblemDescription`,`UserName`) VALUES('2016-09-03', 3, 'Found mould on ceiling','Ting Liu');
+INSERT INTO maintenancerequest(`RequestDate`,`ProblemTypeNo`,`ProblemDescription`,`UserName`) VALUES('2016-12-12', 1, 'Tub dispense water too slow','David Zheng');
+
+INSERT INTO cost(`LaborCost`,`MaterialCost`) VALUES('18','10');
+INSERT INTO cost(`LaborCost`,`MaterialCost`) VALUES('18','15.5');
+INSERT INTO cost(`LaborCost`,`MaterialCost`) VALUES('9','0');
+INSERT INTO cost(`LaborCost`,`MaterialCost`) VALUES('54','30');
+INSERT INTO cost(`LaborCost`,`MaterialCost`) VALUES('9','10.99');
+
+INSERT INTO schedule(`ScheduleDate`,`StaffID`) VALUES('2016-12-02',1);
+INSERT INTO schedule(`ScheduleDate`,`StaffID`) VALUES('2016-03-25',1);
+INSERT INTO schedule(`ScheduleDate`,`StaffID`) VALUES('2016-07-14',2);
+INSERT INTO schedule(`ScheduleDate`,`StaffID`) VALUES('2016-09-05',3);
+INSERT INTO schedule(`ScheduleDate`,`StaffID`) VALUES('2016-12-14',1);
+
+INSERT INTO maintenanceorder(`OrderDate`,`OrderStatus`,`FinishedDate`,`CostNo`) VALUES('2016-12-02','Finished','2016-12-03',1);
+INSERT INTO maintenanceorder(`OrderDate`,`OrderStatus`,`FinishedDate`,`CostNo`) VALUES('2016-03-25','Finished','2016-03-25',2);
+INSERT INTO maintenanceorder(`OrderDate`,`OrderStatus`,`FinishedDate`,`CostNo`) VALUES('2016-07-14','Finished','2016-07-14',3);
+INSERT INTO maintenanceorder(`OrderDate`,`OrderStatus`,`FinishedDate`,`CostNo`) VALUES('2016-09-05','Finished','2016-09-08',4);
+INSERT INTO maintenanceorder(`OrderDate`,`OrderStatus`,`FinishedDate`,`CostNo`) VALUES('2016-12-14','Finished','2016-12-14',5);
+
+
+INSERT INTO maintenance(`ApartmentID`,`UnitNo`,`RequestNo`,`ScheduleNo`,`OrderNo`,`ProblemTypeNo`) VALUES('APT001','1A',1,1,1,1);
+INSERT INTO maintenance(`ApartmentID`,`UnitNo`,`RequestNo`,`ScheduleNo`,`OrderNo`,`ProblemTypeNo`) VALUES('APT001','1B',2,2,2,1);
+INSERT INTO maintenance(`ApartmentID`,`UnitNo`,`RequestNo`,`ScheduleNo`,`OrderNo`,`ProblemTypeNo`) VALUES('APT002','102',3,3,3,2);
+INSERT INTO maintenance(`ApartmentID`,`UnitNo`,`RequestNo`,`ScheduleNo`,`OrderNo`,`ProblemTypeNo`) VALUES('APT001','1A',4,4,4,3);
+INSERT INTO maintenance(`ApartmentID`,`UnitNo`,`RequestNo`,`ScheduleNo`,`OrderNo`,`ProblemTypeNo`) VALUES('APT003','1001',5,5,5,1);
+
+

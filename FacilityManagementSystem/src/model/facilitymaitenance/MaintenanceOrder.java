@@ -6,7 +6,7 @@ public class MaintenanceOrder {
 
 	private int orderNo;
 	private Date orderDate;	
-	private Schedule schedule;
+	//private Schedule schedule;
 	private String orderStatus;	
 	private Date finishedDate;
 	private Cost cost;
@@ -28,13 +28,13 @@ public class MaintenanceOrder {
 		return orderDate;
 	}
 	
-	public void setSchedule(Schedule schedule){
-		this.schedule = schedule;
-	}
+	//public void setSchedule(Schedule schedule){
+		//this.schedule = schedule;
+	//}
     
-	public Schedule getSchedule(){
-		return schedule;
-	}
+	//public Schedule getSchedule(){
+		//return schedule;
+	//}
 	
 	public void setOrderStatus(String orderStatus){
 		this.orderStatus = orderStatus;
