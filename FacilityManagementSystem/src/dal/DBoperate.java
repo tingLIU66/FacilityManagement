@@ -16,7 +16,7 @@ public class DBoperate {
 			try {
 				//System.out.println("Loading JDBC driver...");
 				Class.forName("com.mysql.jdbc.Driver");
-				System.out.println("JDBC driver successfully loaded!");
+				//System.out.println("JDBC driver successfully loaded!");
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}
@@ -28,7 +28,7 @@ public class DBoperate {
 				System.out.println("Connecting to the MySQL database...");
 				connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);	
 				//connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/facilitymanagementsystem", "DBuser", "DBkaimen");	
-				System.out.println("MySQL Database connected!");
+				//System.out.println("MySQL Database connected!");
 			}
 		    catch (SQLException e) {
 			System.out.println(e.toString());
