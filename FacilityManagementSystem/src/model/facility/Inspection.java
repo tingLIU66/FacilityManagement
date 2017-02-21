@@ -6,6 +6,7 @@ public class Inspection
 	private String inspectionType;
 	private String technician;
 	private int facilityID;
+	private int inspectionID;
 	
 	public void setinspectionINFO(String inspectionINFO)
 	{
@@ -40,6 +41,17 @@ public class Inspection
 		return facilityID; 
 	}
 	
+	public void setinspectionID (int inspectionID)
+	{
+		this.inspectionID = inspectionID;
+		
+	}
+	
+	public int getinspectionID ()
+	{
+		return inspectionID; 
+	}
+	
 	public void setTechnician(String technician)
 	{
 		this.technician = technician;
@@ -55,11 +67,6 @@ public class Inspection
 	{
 		return "Inspection: \t" + getinspectionINFO () + "\t\t" + "Inspection Type: " + getinspectionType () + "Facility ID: \t" + getfacilityID()+ "Technician: \t" + getTechnician (); 
 	}
-	
-	/*public void listInspections()
-	{
-		
-	} */
 	
 
 }

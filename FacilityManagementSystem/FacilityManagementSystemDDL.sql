@@ -122,11 +122,11 @@ CONSTRAINT Maintenance_FK5 FOREIGN KEY(LogID) REFERENCES  Log (LogID));
 INSERT INTO apartment(`ApartmentID`,`Name`) VALUES('APT001', 'Optima Chicago Center');
 INSERT INTO apartment (`ApartmentID`, `Name`) VALUES('APT002', 'K2 Apartments');
 INSERT INTO apartment (`ApartmentID`, `Name`) VALUES('APT003', 'Buena Shores');
-INSERT INTO FacilityDetail(`Address`,`Zipcode`, `Age`,`Capatity`,`Parking`,`ApartmentID`) VALUES('200 E Illinois St, Chicago, IL', '60611', 3 , 325, 'Yes', 'APT001');
-INSERT INTO FacilityDetail(`Address`,`Zipcode`,`Age`,`Capatity`,`Parking`,`ApartmentID`) VALUES('365 N Halsted St, Chicago, IL', '60661',3,425, 'Yes', 'APT002');
-INSERT INTO FacilityDetail(`Address`,`Zipcode`,`Age`,`Capatity`,`Parking`,`ApartmentID`) VALUES('833 W Buena Ave, Chicago, IL', '60613', 47, 210, 'No', 'APT003');
+INSERT INTO FacilityDetail(`Address`,`Zipcode`, `Age`,`Capatity`,`Parking`,`ApartmentID`) VALUES('200 E Illinois St, Chicago, IL', '60611', 3 , 20, 'Yes', 'APT001');
+INSERT INTO FacilityDetail(`Address`,`Zipcode`,`Age`,`Capatity`,`Parking`,`ApartmentID`) VALUES('365 N Halsted St, Chicago, IL', '60661',3,15, 'Yes', 'APT002');
+INSERT INTO FacilityDetail(`Address`,`Zipcode`,`Age`,`Capatity`,`Parking`,`ApartmentID`) VALUES('833 W Buena Ave, Chicago, IL', '60613', 47, 10, 'No', 'APT003');
 
-INSERT INTO unit(`UnitNo`,`Bedroom`,`UnitStatus`,`ApartmentID`) VALUES('1A',1,'Available','APT001');
+INSERT INTO unit(`UnitNo`,`Bedroom`,`UnitStatus`,`ApartmentID`) VALUES('1A',1,'Rented','APT001');
 INSERT INTO unit(`UnitNo`,`Bedroom`,`UnitStatus`,`ApartmentID`) VALUES('1B',2,'Rented','APT001');
 INSERT INTO unit(`UnitNo`,`Bedroom`,`UnitStatus`,`ApartmentID`) VALUES('2A',1,'Available','APT001');
 INSERT INTO unit(`UnitNo`,`Bedroom`,`UnitStatus`,`ApartmentID`) VALUES('2B',2,'Rented','APT001');
