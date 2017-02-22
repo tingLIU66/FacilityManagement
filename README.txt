@@ -9,4 +9,5 @@ For project1 submissions:
 -- Project1_ERD.jpg which delineates the tables and the fields, and their relationships among each other of the database.
 -- FacilityManagementSystemDDL.sql that include sql commands which creates the db, the tables, and populate the tables with some sample data records.
 -- Project1_UML.jpg diagram which outlines the classes and their relations.
+-- Three screenshots indicate how to use the client service.
 -- An app that has the basic architecture laid out per the above two mentioned diagrams
