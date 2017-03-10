@@ -322,8 +322,8 @@ public class FacilityMaintenanceDAO extends DBoperate{
 	  * @param apartmentID
 	  * @return
 	  */
-	 public float calcProblemRateForFacility(String apartmentID){
-		 float problemrate = 0;
+	 public float getProblemcount(String apartmentID){
+		 float problemcount = 0;
 		 String getnumber = "SELECT COUNT(`MaintenanceNo`)" 
 				 			+" FROM `maintenanceorder`, maintenance"
 				 			+" WHERE YEAR(`FinishedDate`) = 2016"
@@ -342,7 +342,7 @@ public class FacilityMaintenanceDAO extends DBoperate{
 				
 
 				if (rs.next()) {
-					    problemrate = rs.getFloat(1)/12;			            	
+					    problemcount = rs.getFloat(1);			            	
 		            }
 		     
 				stmt.close();
@@ -353,9 +353,11 @@ public class FacilityMaintenanceDAO extends DBoperate{
 			}
 			super.closeConnection(connection);
 		 
-		return problemrate;
+		return problemcount;
 	 
 	 }
+
+
 	
 	 public Cost calcMaintenanceCostForFacility(String apartmentID){
 		 Cost cost = new Cost();

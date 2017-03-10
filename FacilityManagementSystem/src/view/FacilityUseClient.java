@@ -33,23 +33,22 @@ public class FacilityUseClient {
     apartments = fadmin.listFacilities();	
 
 	
-	System.out.println("*************** Check if Facility is in use *****************************");
-	System.out.println("Input apartmentID and UnitNO to check Unit Status"); 
-	//Scanner sc2 = new Scanner(System.in);
-	System.out.println("Input apartmentID:");
-	String inputaptID = sc.next();
-	System.out.println("Input Unit No:");
-	String inputUnitNo = sc.next();
+	//System.out.println("*************** Check if Facility is in use *****************************");
+	//System.out.println("Input apartmentID and UnitNO to check Unit Status"); 
+	//System.out.println("Input apartmentID:");
+	//String inputaptID = sc.next();
+	//System.out.println("Input Unit No:");
+	//String inputUnitNo = sc.next();
 	
-	System.out.println("Unit " + inputUnitNo + " " +  fuse.isInUseDuringInterval(inputaptID, inputUnitNo));	
-	System.out.println();
+	//System.out.println("Unit " + inputUnitNo + " " +  fuse.isInUseDuringInterval(inputaptID, inputUnitNo));	
+	//System.out.println();
 	
 	System.out.println("*************** Calculate Facility Usage Rate *****************************");
 	System.out.println("Input apartmentID to calculate facility's usage rate"); 
 	System.out.println("Input apartmentID:");
 	String inputaptID2 = sc.next();
 	
-	fuse.calcUsagerate(inputaptID2);
+	System.out.println("The useagerate of Apartment " + inputaptID2 + " is: " + fuse.calcUsagerate(inputaptID2) + "%");
 	System.out.println();
 
 	System.out.println("*************** Vacate A Facility *****************************");
@@ -67,7 +66,7 @@ public class FacilityUseClient {
 	String inputaptID5 = sc.next();
 	System.out.println("Input UnitNo:");
 	String unitNoID5 = sc.next();
-	//initiat a aptUser
+	
 	AptUser aptuser = new AptUser();
 	aptuser.setUserName("test user");
 	aptuser.setPhoneNo("1111111111");

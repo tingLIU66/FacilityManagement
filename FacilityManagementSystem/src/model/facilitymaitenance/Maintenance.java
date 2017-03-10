@@ -98,7 +98,7 @@ public class Maintenance {
 	 }
 	 
 	 public float calcProblemRateForFacility(String apartmentID){
-		 return mdao.calcProblemRateForFacility(apartmentID);
+		 return mdao.getProblemcount(apartmentID)/12*100;
 	 }
 	 
 	 public HashMap<String,Integer> listFacilityProblems(String apartmentID) {

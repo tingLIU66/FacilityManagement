@@ -28,13 +28,17 @@ import java.util.List;
 
 public class FacilityUseDAO extends DBoperate
 {
-	//public boolean inInUseDuringInterval
-	
+		
 	public FacilityUseDAO()
 	{
 		super();
 	}
-
+   /**
+    * Check if is a certain unit is in use or not
+    * @param apartmentID
+    * @param UnitNo
+    * @return
+    */
 	public String isInUseDuringInterval(String apartmentID, String UnitNo)
 	{
 		String inUse = "Rented";
@@ -54,11 +58,11 @@ public class FacilityUseDAO extends DBoperate
 			
 			if(rs.next()){
 				String result = rs.getString(1);
-				//System.out.println(result);
+				
 				if (result.contentEquals(inUse))
 				{
 					isinuse = "is in use";	
-					//System.out.println(isinuse);
+					
 				}
 			}
 
@@ -72,7 +76,12 @@ public class FacilityUseDAO extends DBoperate
 		super.closeConnection(connection);
 		return isinuse; 
 	}
-	
+
+	/**
+	 * List all the units that rented out
+	 * @param apartmentID
+	 * @return
+	 */
 	public List<Unit> listActualUsage(String apartmentID)
 	{
 		List <Unit> usageList = new ArrayList <Unit>();
@@ -105,6 +114,13 @@ public class FacilityUseDAO extends DBoperate
 
 		return usageList;	
 	}
+	
+	/**
+	 * Mark a unit as available
+	 * @param apartmentID
+	 * @param unitNo
+	 * @return
+	 */
 	public String vacateFacility(String apartmentID, String unitNo)
 	{
 		
@@ -133,7 +149,14 @@ public class FacilityUseDAO extends DBoperate
 
 	}
 	
-	public void assignFacility(String apartmentID, String unitNo, AptUser useApt)
+	/**
+	 * Assign a unit to a user
+	 * @param apartmentID
+	 * @param unitNo
+	 * @param useApt
+	 * @return
+	 */
+	public String assignFacility(String apartmentID, String unitNo, AptUser useApt)
 	{
 		String assignQuery = "INSERT INTO AptUser (`UserName`,`PhoneNo`,`UnitNo`,`ApartmentID`) VALUES(?,?,?,?);";
 		String updateQuery = "update unit set `unitstatus` = ? where apartmentID = ? and unitNo = ?";
@@ -165,10 +188,16 @@ public class FacilityUseDAO extends DBoperate
 		
 		super.closeConnection(connection);
 		
-		System.out.println("Apartment " + apartmentID + " " + unitNo + " is assigned to user " +  useApt.getUserName());
+		return "Apartment " + apartmentID + " " + unitNo + " is assigned to user " +  useApt.getUserName();
 
 		
 	}
+	
+	/**
+	 * List all the inspections for a apartment
+	 * @param apartmentID
+	 * @return
+	 */
 	public List<Inspection> listInspections(String apartmentID)
 	{
 		List <Inspection> inspectList = new ArrayList <Inspection>();
@@ -205,15 +234,16 @@ public class FacilityUseDAO extends DBoperate
 		
 	}
 
+	/**
+	 * Get the number of units that rented out
+	 * @param apartmentID
+	 * @return
+	 */
 	
-	
-	public void calcUsagerate(String apartmentID)
+	public float getUsedCount(String apartmentID)
 	{
 		String countunitQuery = "SELECT COUNT(UnitNo) FROM unit WHERE UnitStatus = 'Rented' AND apartmentID =? ";
-		String getcapQuery = "SELECT capatity FROM facilitydetail WHERE apartmentID =?";
-		int usecount = 0;
-		int cap = 0;
-		float useRate = 0;
+		int usedcount = 0;
 		Connection connection = super.getConnection();
 		Statement stmt = null;
 		
@@ -223,29 +253,14 @@ public class FacilityUseDAO extends DBoperate
 			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(countunitQuery);
 			preStatement.setString(1,apartmentID);
 			ResultSet rs = preStatement.executeQuery(); 
-			
-			
-			PreparedStatement preStatement1 = (PreparedStatement) connection.prepareStatement(getcapQuery);
-			preStatement1.setString(1,apartmentID);
-			ResultSet rs1 = preStatement1.executeQuery();
-			
-			//int parseInt1 = 0;
+		
 			if(rs.next() )
 			{
-				usecount = rs.getInt(1);
-			
+				usedcount = rs.getInt(1);
+		
 			}
-			//int parseInt2 = 0;
-			if(rs1.next() )
-			{
-				cap  = rs1.getInt(1);
-			
-			}
-			
-			useRate = (float) usecount/(float) cap;
-			System.out.println(usecount + " " + cap + " " +useRate );
+		
 			stmt.close(); 
-			System.out.println("Usage Rate is " + useRate*100 + "%");
 			
 		}
 		catch (SQLException e) 
@@ -254,7 +269,45 @@ public class FacilityUseDAO extends DBoperate
 		}
 		super.closeConnection(connection);
 		
+		return (float)usedcount;
+	}
+	
+	/**
+	 * Get the capacity of an apartment
+	 * @param apartmentID
+	 * @return
+	 */
+	public float getCapacity(String apartmentID)
+	{
+		String getcapQuery = "SELECT capatity FROM facilitydetail WHERE apartmentID =?";
+		int cap = 0;
 		
+		Connection connection = super.getConnection();
+		Statement stmt = null;
+		
+		try 
+		{
+			stmt = connection.createStatement();
+				
+			PreparedStatement preStatement1 = (PreparedStatement) connection.prepareStatement(getcapQuery);
+			preStatement1.setString(1,apartmentID);
+			ResultSet rs1 = preStatement1.executeQuery();			
+		
+			if(rs1.next() )
+			{
+				cap  = rs1.getInt(1);			
+			}
+			
+			stmt.close(); 						
+		}
+		
+		catch (SQLException e) 
+		{
+			System.out.println(e.toString());
+		}
+		super.closeConnection(connection);
+		
+		return (float)cap;
 	}
 	
 

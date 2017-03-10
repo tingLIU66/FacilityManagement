@@ -12,30 +12,62 @@ public class FacilityUse {
 	
 	private FacilityUseDAO facUseDAO = new FacilityUseDAO();
 	
+	/**
+	 * Check if is a certain unit is in use or not
+	 * @param apartmentID
+	 * @param UnitNo
+	 * @return
+	 */
+	
 	public String isInUseDuringInterval(String apartmentID, String UnitNo)
 	{
 		return facUseDAO.isInUseDuringInterval(apartmentID, UnitNo);
 		
 		
 	}
-	public void calcUsagerate(String apartmentID)
+	
+	/**
+	 * Calculate the usage rate of an apartment
+	 * @param apartmentID
+	 * @return
+	 */
+	public float calcUsagerate(String apartmentID)
 	{
-		facUseDAO.calcUsagerate(apartmentID);
+		return facUseDAO.getUsedCount(apartmentID)/facUseDAO.getCapacity(apartmentID)*100;
 		
 	}
 	
+	/**
+	 * Mark a unit as available
+	 * @param apartmentID
+	 * @param unitNo
+	 * @return
+	 */
 	public String vacateFacility(String apartmentID, String unitNo)
 	{
 		return facUseDAO.vacateFacility(apartmentID, unitNo);
 		
 	}
 	
-	public void assignFacility(String apartmentID, String unitNo, AptUser useApt)
+	/**
+	 * Assign a unit to a user
+	 * @param apartmentID
+	 * @param unitNo
+	 * @param useApt
+	 * @return
+	 */
+	
+	public String assignFacility(String apartmentID, String unitNo, AptUser useApt)
 	{
-		facUseDAO.assignFacility(apartmentID, unitNo, useApt);
+		return facUseDAO.assignFacility(apartmentID, unitNo, useApt);
 		
 	}
 	
+	/**
+	 * List all the units that rented out
+	 * @param apartmentID
+	 * @return
+	 */
 	public List<Inspection> listInspections(String apartmentID)
 	{
 		return facUseDAO.listInspections(apartmentID);
