@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Set;
 import java.util.ArrayList;
-
+import java.util.HashSet;
 
 import model.facilityuse.AptUser;
 import model.facilityuse.FacilityUse;
@@ -198,9 +198,9 @@ public class FacilityUseDAO extends DBoperate
 	 * @param apartmentID
 	 * @return
 	 */
-	public List<Inspection> listInspections(String apartmentID)
+	public Set<Inspection> listInspections(String apartmentID)
 	{
-		List <Inspection> inspectList = new ArrayList <Inspection>();
+		Set <Inspection> inspectList = new HashSet <Inspection>();
 		String listQuery = "SELECT InspectionID FROM Inspection WHERE apartmentID =?";
 		Connection connection = super.getConnection();
 		Statement stmt = null;

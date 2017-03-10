@@ -9,6 +9,7 @@ import model.facility.Apartment;
 import model.facility.FacilityAdmin;
 
 import model.facility.FacilityDetail;
+import model.facility.Inspection;
 import model.facility.Unit;
 import model.facilityuse.AptUser;
 import model.facilityuse.FacilityUse;
@@ -33,15 +34,15 @@ public class FacilityUseClient {
     apartments = fadmin.listFacilities();	
 
 	
-	//System.out.println("*************** Check if Facility is in use *****************************");
-	//System.out.println("Input apartmentID and UnitNO to check Unit Status"); 
-	//System.out.println("Input apartmentID:");
-	//String inputaptID = sc.next();
-	//System.out.println("Input Unit No:");
-	//String inputUnitNo = sc.next();
+	System.out.println("*************** Check if Facility is in use *****************************");
+	System.out.println("Input apartmentID and UnitNO to check Unit Status"); 
+	System.out.println("Input apartmentID:");
+	String inputaptID = sc.next();
+	System.out.println("Input Unit No:");
+	String inputUnitNo = sc.next();
 	
-	//System.out.println("Unit " + inputUnitNo + " " +  fuse.isInUseDuringInterval(inputaptID, inputUnitNo));	
-	//System.out.println();
+	System.out.println("Unit " + inputUnitNo + " " +  fuse.isInUseDuringInterval(inputaptID, inputUnitNo));	
+	System.out.println();
 	
 	System.out.println("*************** Calculate Facility Usage Rate *****************************");
 	System.out.println("Input apartmentID to calculate facility's usage rate"); 
@@ -82,7 +83,20 @@ public class FacilityUseClient {
 	System.out.println("Input apartmentID:");
 	String inputaptID6 = sc.next();
 	
-	fuse.listInspections(inputaptID5);
+	Set<Inspection> inspections = new HashSet<Inspection>();
+	inspections = fuse.listInspections(inputaptID6);	
+	
+	Iterator<Inspection> it = inspections.iterator();
+	while(it.hasNext()) {
+		Inspection isp = (Inspection) it.next();
+		
+		System.out.println("ApartmentID: " + isp.getfacilityID());
+		System.out.println("InspectionID: " + isp.getinspectionID());
+		System.out.println("InspectionINFO: " + isp.getinspectionINFO());
+		System.out.println("InspectionType: " + isp.getinspectionType());
+		System.out.println("Technician: " + isp.getTechnician());
+		System.out.println();
+	}
 
 }		
 	

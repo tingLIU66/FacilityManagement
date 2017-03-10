@@ -3,8 +3,7 @@ package model.facilityuse;
 import dal.FacilityUseDAO;
 import model.facilityuse.AptUser;
 import model.facility.Inspection;
-import model.facility.Unit; 
-import java.util.List;
+import java.util.Set;
 
 
 
@@ -68,7 +67,7 @@ public class FacilityUse {
 	 * @param apartmentID
 	 * @return
 	 */
-	public List<Inspection> listInspections(String apartmentID)
+	public Set<Inspection> listInspections(String apartmentID)
 	{
 		return facUseDAO.listInspections(apartmentID);
 		

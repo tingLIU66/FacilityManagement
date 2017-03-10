@@ -23,7 +23,7 @@ public class MaintenanceClient {
 	    System.out.println("*************** Creating Maintenance related objects ***************************");
 	    Maintenance maint = new Maintenance(); 
 	    Cost cost = new Cost();
-/*	    
+	    
 	    System.out.println("*************List all the maintenances of a specific apartment*************************");
 		Set<Maintenance> allmaints = new HashSet<>();
 		System.out.println("Input apartmentID you want to check:");
@@ -73,7 +73,7 @@ public class MaintenanceClient {
 		System.out.println("MaterialCost: " + cost.getMaterialCost());
 		System.out.println("Total " + cost.getTotal());
 		System.out.println();
-*/		
+		
 		System.out.println("******Calculate the monthly problem rate of a specific apartment in a given year********");
 		System.out.println("Input apartmentID:");
 		String rateaptID = sc.next();   
