@@ -1,6 +1,6 @@
 package model.facilityuse;
 
-public class AptUser 
+public class AptUser implements AptUserIntf
 {
 	private String UserName;
 	//private String userFname;

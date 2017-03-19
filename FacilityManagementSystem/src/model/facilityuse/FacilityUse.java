@@ -7,7 +7,7 @@ import java.util.Set;
 
 
 
-public class FacilityUse {
+public class FacilityUse implements FacilityUseIntf {
 	
 	private FacilityUseDAO facUseDAO = new FacilityUseDAO();
 	
