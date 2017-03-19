@@ -20,7 +20,7 @@ public class FacilityProblem {
 		return problemtypeNo;
 	}
 	
-	public void setProblemType(String problemTypen){
+	public void setProblemType(String problemType){
 		this.problemType = problemType;
 	}
     

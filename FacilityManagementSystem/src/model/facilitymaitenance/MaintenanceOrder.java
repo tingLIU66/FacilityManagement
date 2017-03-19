@@ -36,15 +36,7 @@ public class MaintenanceOrder {
 	public Date getOrderDate(){
 		return orderDate;
 	}
-	
-	//public void setSchedule(Schedule schedule){
-		//this.schedule = schedule;
-	//}
-    
-	//public Schedule getSchedule(){
-		//return schedule;
-	//}
-	
+
 	public void setOrderStatus(String orderStatus){
 		this.orderStatus = orderStatus;
 	}
