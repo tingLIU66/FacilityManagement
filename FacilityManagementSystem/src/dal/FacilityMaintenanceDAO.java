@@ -88,11 +88,7 @@ public class FacilityMaintenanceDAO extends DBoperate{
 			if(rs1.next()){
 				maintrequest = new MaintenanceRequest(requestNo, new AptUser(rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5)),
 														new FacilityProblem(rs1.getInt(6),rs1.getString(7)), rs1.getString(8),rs1.getDate(9));
-				//maintrequest.setRequestNo(requestNo);
-				//maintrequest.setAptUser(new AptUser(rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5)));
-				//maintrequest.setFacilityProblem(new FacilityProblem(rs1.getInt(6),rs1.getString(7)));
-				//maintrequest.setProblemDescriptin(rs1.getString(8));
-				//maintrequest.setRequestDate(rs1.getDate(9));
+
 			}
 			
 			stmt.close();
@@ -150,10 +146,7 @@ public class FacilityMaintenanceDAO extends DBoperate{
 			
 			if(rs1.next()){
 				schedule = new Schedule(scheduleNo,rs1.getDate(2),staff);
-				//schedule.setScheduleNo(scheduleNo);
-				//schedule.setScheduleDate(rs1.getDate(2));
-				//schedule.setStaff(staff);
-				
+
 			}
 			
 			stmt.close();
@@ -191,11 +184,6 @@ public class FacilityMaintenanceDAO extends DBoperate{
 				MaintenanceRequest request = new MaintenanceRequest(rs1.getInt(1),new AptUser(rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5)),
 						                                            new FacilityProblem(rs1.getInt(6),rs1.getString(7)),rs1.getString(8),rs1.getDate(9));          
 	            	
-				//request.setRequestNo(rs1.getInt(1));
-				//request.setAptUser(new AptUser(rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5)));
-				//request.setFacilityProblem(new FacilityProblem(rs1.getInt(6),rs1.getString(7)));
-				//request.setProblemDescriptin(rs1.getString(8));
-				//request.setRequestDate(rs1.getDate(9));
 	    			
 	    		requests.add(request);
 	            }
@@ -251,15 +239,7 @@ public class FacilityMaintenanceDAO extends DBoperate{
                                                                              new FacilityProblem(rs1.getInt(7),rs1.getString(8)),rs1.getString(9),rs1.getDate(10)));
 	                maintenance.setSchedule(new Schedule(rs1.getInt(11),rs1.getDate(12),new Staff(rs1.getInt(13),rs1.getString(14),rs1.getString(15), rs1.getString(16))));
 	                maintenance.setMaintenanceOrder(new MaintenanceOrder(rs1.getInt(17), rs1.getDate(18),rs1.getString(19),rs1.getDate(20), new Cost(rs1.getFloat(22),rs1.getFloat(22))));
-	                
-	                
-	            	//maintenance.setApartmentID(rs.getString(2));
-	            	//maintenance.setUnitNo(rs.getString(3));
-	            	//maintenance.setRequestdate(rs.getDate(4));
-	            	//maintenance.setProblemType(rs.getString(5));
-	            	//maintenance.setMaintenanceTechnician(rs.getString(6)+ rs.getString(7));
-	            	//maintenance.setFinisheddate(rs.getDate(8));
-	                    	
+                    	
      	           	maintenances.add(maintenance);
 	            
 	        }
@@ -382,9 +362,7 @@ public class FacilityMaintenanceDAO extends DBoperate{
 
 				if (rs.next()) {
 					cost = new Cost(rs.getFloat(1),rs.getFloat(2));
-					   //cost.setLaborCost(rs.getFloat(1));  
-					   //cost.setMaterialCost(rs.getFloat(2));
-					  // cost.setTotal();
+
 		            }
 		     
 				stmt.close();
