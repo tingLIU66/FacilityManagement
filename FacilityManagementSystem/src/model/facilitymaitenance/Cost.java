@@ -3,18 +3,29 @@ package model.facilitymaitenance;
 
 public class Cost {
 	
-	private int costNo;
+	//private int costNo;
 	private float laborCost;	
 	private float materialCost;
 	private float total;
 	
-	public void setCostNo(int costNo){
-		this.costNo = costNo;
+	
+	
+	
+	public Cost(float laborCost, float materialCost) {
+		super();
+		//this.costNo = costNo;
+		this.laborCost = laborCost;
+		this.materialCost = materialCost;
+		this.total = laborCost + materialCost;
 	}
+
+	//public void setCostNo(int costNo){
+		//this.costNo = costNo;
+	//}
     
-	public int getCostNo(){
-		return costNo;
-	}
+	//public int getCostNo(){
+		//return costNo;
+	//}
 	
 	public void setLaborCost(float laborCost){
 		this.laborCost = laborCost;

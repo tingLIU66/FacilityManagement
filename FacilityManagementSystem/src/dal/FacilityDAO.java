@@ -10,6 +10,7 @@ import java.util.Set;
 
 import model.facility.Apartment;
 import model.facility.FacilityDetail;
+import model.facilitymaitenance.Maintenance;
 
 
 
@@ -230,4 +231,30 @@ public String removeFacility(String apartmentID){
 	
 	return apartmentID + " is deleted from the database!";
 }
+
+/**
+ * Insert a record into maintenance table once a request created	
+ * @param maint
+ */
+/*public void addMaintenance(Maintenance maint){
+	
+	String addmaintrecordquery = "INSERT INTO maintenance(`ApartmentID`,`UnitNo`,`RequestNo`, `ProblemTypeNo`) VALUES(?,?,?,?);";
+	Connection connection = super.getConnection();
+	Statement stmt = null;
+	
+	try{
+	stmt = connection.createStatement();
+	PreparedStatement preStatement1 = (PreparedStatement) connection.prepareStatement(addmaintrecordquery);
+	preStatement1.setString(1, maint.getMaintenanceRequest().getAptUser().getApartmentID());
+	preStatement1.setString(2, maint.getMaintenanceRequest().getAptUser().getUnitNo());
+	preStatement1.setInt(3, maint.getMaintenanceRequest().getRequestNo());
+	preStatement1.setInt(4, maint.getMaintenanceRequest().getProblemTypeNo());
+	
+	preStatement1.executeUpdate();
+	
+} catch (SQLException e) {
+	System.out.println(e.toString());
+}
+}
+*/
 }

@@ -20,12 +20,17 @@ public class Maintenance {
 	o public object listFacilityProblems() 
 */	
 	private int maintenanceNo;
-	private String apartmentID;
-	private String unitNo;
-	private Date requestdate;
-	private String problemType;
-	private String maintenanceTechnician;
-	private Date finisheddate;
+	//private String apartmentID;
+	//private String unitNo;
+	//private Date requestdate;
+	//private String problemType;
+	//private String maintenanceTechnician;
+	//private Date finisheddate;
+	private MaintenanceRequest maintrequest;
+	private MaintenanceOrder maintorder;
+	private Schedule schedule;
+	//private FacilityProblem fctproblem;
+	private Log log;
 	
 	FacilityMaintenanceDAO mdao = new FacilityMaintenanceDAO();
 	
@@ -37,59 +42,100 @@ public class Maintenance {
 		return maintenanceNo;
 	}
 	
-	public void setApartmentID(String apartmentID){
-		this.apartmentID = apartmentID;
-	}
+//	public void setApartmentID(String apartmentID){
+//		this.apartmentID = apartmentID;
+//	}
     
-	public String getApartmentID(){
-		return apartmentID;
-	}
+//	public String getApartmentID(){
+//		return apartmentID;
+//	}
 
 	
-	public void setUnitNo(String unitNo){
-		this.unitNo = unitNo;
-	}
+//	public void setUnitNo(String unitNo){
+//		this.unitNo = unitNo;
+//	}
     
-	public String getUnitNo(){
-		return unitNo;
-	}
+//	public String getUnitNo(){
+//		return unitNo;
+//	}
 	
-	public void setRequestdate(Date requestdate){
-		this.requestdate = requestdate;
-	}
+//	public void setRequestdate(Date requestdate){
+//		this.requestdate = requestdate;
+//	}
     
-	public Date getRequestdate(){
-		return requestdate;
-	}
+//	public Date getRequestdate(){
+//		return requestdate;
+//	}
 	
-	public void setProblemType(String problemType){
-		this.problemType = problemType;
-	}
+//	public void setProblemType(String problemType){
+//		this.problemType = problemType;
+//	}
     
-	public String getProblemType(){
-		return problemType;
-	}
+//	public String getProblemType(){
+//		return problemType;
+//	}
 
 	
-	public void setMaintenanceTechnician(String maintenanceTechnician){
-		this.maintenanceTechnician = maintenanceTechnician;
-	}
+//	public void setMaintenanceTechnician(String maintenanceTechnician){
+//		this.maintenanceTechnician = maintenanceTechnician;
+//	}
     
-	public String getMaintenanceTechnician(){
-		return maintenanceTechnician;
-	}
+//	public String getMaintenanceTechnician(){
+//		return maintenanceTechnician;
+//	}
 	    
-	public void setFinisheddate(Date finisheddate){
-		this.finisheddate = finisheddate;
+//	public void setFinisheddate(Date finisheddate){
+//		this.finisheddate = finisheddate;
+//	}
+    
+//	public Date getFinisheddate(){
+//		return finisheddate;
+//	}
+
+	
+	public void setMaintenanceRequest(MaintenanceRequest maintrequest){
+		this.maintrequest = maintrequest;
 	}
     
-	public Date getFinisheddate(){
-		return finisheddate;
+	public MaintenanceRequest getMaintenanceRequest(){
+		return maintrequest;
 	}
 	
+	public void setSchedule(Schedule schedule){
+		this.schedule = schedule;
+	}
+    
+	public Schedule getSchedule(){
+		return schedule;
+	}
 	
-	public MaintenanceRequest makeFacilityMaintRequest(int problemtypeNo, String pdescription, AptUser aptuser){
-		return mdao.makeFacilityMaintRequest(problemtypeNo, pdescription, aptuser);
+	public void setMaintenanceOrder(MaintenanceOrder maintorder){
+		this.maintorder = maintorder;
+	}
+    
+	public MaintenanceOrder getMaintenanceOrder(){
+		return maintorder;
+	}
+	
+	//public void setFacilityProblem(FacilityProblem fctproblem){
+		//this.fctproblem = fctproblem;
+	//}
+    
+	//public FacilityProblem getFacilityProblem(){
+		//return fctproblem;
+	//}
+	
+	public void setLog(Log log){
+		this.log = log;
+	}
+    
+	public Log getLog(){
+		return log;
+	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	public MaintenanceRequest makeFacilityMaintRequest(int problemtypeNo, String pdescription, String username){
+		return mdao.makeFacilityMaintRequest(problemtypeNo, pdescription, username);
 			
 	}
 	

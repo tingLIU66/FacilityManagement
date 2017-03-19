@@ -22,9 +22,8 @@ public class MaintenanceClient {
 		Scanner sc = new Scanner(System.in);
 	    System.out.println("*************** Creating Maintenance related objects ***************************");
 	    Maintenance maint = new Maintenance(); 
-	    Cost cost = new Cost();
-	    
-	    System.out.println("*************List all the maintenances of a specific apartment*************************");
+	  	    
+	    System.out.println("*************List all the maintenances summary of a specific apartment*************************");
 		Set<Maintenance> allmaints = new HashSet<>();
 		System.out.println("Input apartmentID you want to check:");
 		String aptid = sc.next();   
@@ -33,12 +32,12 @@ public class MaintenanceClient {
 		while(mit.hasNext()) {
 			Maintenance singlemaint = (Maintenance) mit.next();
 			System.out.println("MaintenanceNo: " + singlemaint.getMaintenanceNo());
-			System.out.println("ApartmentID: " + singlemaint.getApartmentID());
-			System.out.println("Unit: " + singlemaint.getUnitNo());
-			System.out.println("Request Date: " + singlemaint.getRequestdate());
-			System.out.println("Prolem: " + singlemaint.getProblemType());
-			System.out.println("Finished Date: " + singlemaint.getFinisheddate());
-			System.out.println("Maintenance Technician: " + singlemaint.getMaintenanceTechnician());			
+			System.out.println("ApartmentID: " + singlemaint.getMaintenanceRequest().getAptUser().getApartmentID());
+			System.out.println("Unit: " + singlemaint.getMaintenanceRequest().getAptUser().getUnitNo());
+			System.out.println("Request Date: " + singlemaint.getMaintenanceRequest().getRequestDate());
+			System.out.println("Prolem: " + singlemaint.getMaintenanceRequest().getFacilityProblem().getProblemType());
+			System.out.println("Finished Date: " + singlemaint.getMaintenanceOrder().getFinishedDate());
+			System.out.println("Maintenance Technician: " + singlemaint.getSchedule().getStaff().getstaffFname());			
 			
 			System.out.println();
 		}
@@ -63,10 +62,10 @@ public class MaintenanceClient {
 		
 		
 		
-		System.out.println("*************Calculate the cost of a specific apartment in a givin year****************");
+		System.out.println("*************Calculate the cost of a specific apartment in a given year****************");
 		System.out.println("Input apartmentID:");
 		String aptID = sc.next();   
-		cost = maint.calcMaintenanceCostForFacility(aptID);
+	    Cost cost = maint.calcMaintenanceCostForFacility(aptID);
 		System.out.println("============================================================================");   
 		System.out.println("The cost of apartment " + aptID + " in 2016 is as below:");
 		System.out.println("LaborCost: " + cost.getLaborCost());
@@ -101,45 +100,40 @@ public class MaintenanceClient {
 		
 		System.out.println("*************Make a maintenance requset*****************************************");
 	    //Initial a user
-	    MaintenanceRequest mrequest = new MaintenanceRequest();
-	    AptUser aptuser = new AptUser();
-	    aptuser.setUserName("Ting Liu");
-	    aptuser.setPhoneNo("3124446666");
-	    aptuser.setUnitNo("1A");
-	    aptuser.setApartmentID("APT001");
-	    
+		Maintenance maint1 = new Maintenance();
+   
+	    int problemtypeNo = 2;
 	    String pdescription = "Light switch broken";
+	    String username = "Ting Liu";
 	    
-	    mrequest = maint.makeFacilityMaintRequest(2, pdescription, aptuser);
+	    MaintenanceRequest mrequest = maint.makeFacilityMaintRequest(problemtypeNo, pdescription, username);
 	    System.out.println("=======Your request is setted, please check the details=======================");
 	    System.out.println("RuestNo: " + mrequest.getRequestNo());
 		System.out.println("Date: " + mrequest.getRequestDate());
-		System.out.println("Request UserName: " + aptuser.getUserName());
-		System.out.println("ApartmentID: " + aptuser.getApartmentID());
-		System.out.println("Unit: " + aptuser.getUnitNo());
-		System.out.println("Phone: " + aptuser.getPhoneNo());
+		System.out.println("Request UserName: " + mrequest.getAptUser().getUserName());
+		System.out.println("ApartmentID: " + mrequest.getAptUser().getApartmentID());
+		System.out.println("Unit: " + mrequest.getAptUser().getUnitNo());
+		System.out.println("Phone: " + mrequest.getAptUser().getPhoneNo());
 		System.out.println("Problem: " + mrequest.getProblemDescription());
 		System.out.println();
 		
+		maint1.setMaintenanceNo(mrequest.getRequestNo());
+		maint1.setMaintenanceRequest(mrequest);
 		
 		System.out.println("*************Schedule a maintenance**************************************************");
 	    //Initial a Staff
-	    Schedule schdule = new Schedule();
-	    Staff staff = new Staff();
-	    staff.setstaffID(2);
-	    staff.setstaffFname("Kavin");
-	    staff.setstaffLname("Clain");
-	    staff.setSpecialty("Electricity");
-	    
+	    Staff staff = new Staff(2,"Kavin", "Clain", "Electricity");
 		Date sdate = new Date(2016, 2, 22);	  
 	   
-	    schdule = maint.scheduleMaintenance(6, sdate, staff);
+		Schedule schedule = maint.scheduleMaintenance(maint1.getMaintenanceNo(), sdate, staff);
 	    System.out.println("===========A schedule has been palced=================================");
-	    System.out.println("ScheduleNo: " + schdule.getScheduleNo());
-		System.out.println("ScheduleDate: " + schdule.getScheduleDate());
+	    System.out.println("ScheduleNo: " + schedule.getScheduleNo());
+		System.out.println("ScheduleDate: " + schedule.getScheduleDate());
 		System.out.println("Served Staff name: " + staff.getstaffFname() + " " +staff.getstaffLname());
 		System.out.println("Staff specialty: " + staff.getSpecialty());
 		System.out.println();
+		maint1.setSchedule(schedule);
+		
 	}		
 		
 		

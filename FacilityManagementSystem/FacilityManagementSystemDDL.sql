@@ -104,17 +104,13 @@ CONSTRAINT Log_PK PRIMARY KEY (LogID));
 
 CREATE TABLE IF NOT EXISTS Maintenance  
 (MaintenanceNo           INT NOT NULL AUTO_INCREMENT,
-ApartmentID 			VARCHAR(10),
-UnitNo 			    VARCHAR(10),
 RequestNo			INT,
 ScheduleNo		    INT,
 OrderNo 			INT,
-ProblemTypeNo		INT,
 LogID				INT,
 CONSTRAINT Maintenance_PK PRIMARY KEY (MaintenanceNo),
 CONSTRAINT Maintenance_FK1 FOREIGN KEY(OrderNo) REFERENCES  MaintenanceOrder (OrderNo),
 CONSTRAINT Maintenance_FK2 FOREIGN KEY(RequestNo) REFERENCES  MaintenanceRequest (RequestNo),
-CONSTRAINT Maintenance_FK3 FOREIGN KEY(ProblemTypeNo) REFERENCES  FacilityProblem (ProblemTypeNo),
 CONSTRAINT Maintenance_FK4 FOREIGN KEY(ScheduleNo) REFERENCES  Schedule (ScheduleNo),
 CONSTRAINT Maintenance_FK5 FOREIGN KEY(LogID) REFERENCES  Log (LogID));
 
@@ -179,11 +175,11 @@ INSERT INTO maintenanceorder(`OrderDate`,`OrderStatus`,`FinishedDate`,`CostNo`) 
 INSERT INTO maintenanceorder(`OrderDate`,`OrderStatus`,`FinishedDate`,`CostNo`) VALUES('2016-12-14','Finished','2016-12-14',5);
 
 
-INSERT INTO maintenance(`ApartmentID`,`UnitNo`,`RequestNo`,`ScheduleNo`,`OrderNo`,`ProblemTypeNo`) VALUES('APT001','1A',1,1,1,1);
-INSERT INTO maintenance(`ApartmentID`,`UnitNo`,`RequestNo`,`ScheduleNo`,`OrderNo`,`ProblemTypeNo`) VALUES('APT001','1B',2,2,2,1);
-INSERT INTO maintenance(`ApartmentID`,`UnitNo`,`RequestNo`,`ScheduleNo`,`OrderNo`,`ProblemTypeNo`) VALUES('APT002','102',3,3,3,2);
-INSERT INTO maintenance(`ApartmentID`,`UnitNo`,`RequestNo`,`ScheduleNo`,`OrderNo`,`ProblemTypeNo`) VALUES('APT001','1A',4,4,4,3);
-INSERT INTO maintenance(`ApartmentID`,`UnitNo`,`RequestNo`,`ScheduleNo`,`OrderNo`,`ProblemTypeNo`) VALUES('APT003','1001',5,5,5,1);
+INSERT INTO maintenance(`RequestNo`,`ScheduleNo`,`OrderNo`) VALUES(1,1,1);
+INSERT INTO maintenance(`RequestNo`,`ScheduleNo`,`OrderNo`) VALUES(2,2,2);
+INSERT INTO maintenance(`RequestNo`,`ScheduleNo`,`OrderNo`) VALUES(3,3,3);
+INSERT INTO maintenance(`RequestNo`,`ScheduleNo`,`OrderNo`) VALUES(4,4,4);
+INSERT INTO maintenance(`RequestNo`,`ScheduleNo`,`OrderNo`) VALUES(5,5,5);
 
 -- Set requestDate to CURRENT_DATE
 ALTER TABLE maintenancerequest MODIFY `RequestDate`  TIMESTAMP;

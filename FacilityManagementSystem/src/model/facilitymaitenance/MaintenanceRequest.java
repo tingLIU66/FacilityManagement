@@ -8,15 +8,28 @@ import model.facilityuse.AptUser;
 public class MaintenanceRequest {
 		
 	private int requestNo;
+	private AptUser aptuser;
+	private FacilityProblem fctproblem;
 	private String problemDescription;
 	private Date requestDate;	
-	private int problemtypeNo;
-	private AptUser aptuser;
+	//private int problemtypeNo;
 	
+		public MaintenanceRequest(int requestNo, AptUser aptuser, FacilityProblem fctproblem, String problemDescription,
+			Date requestDate) {
+		this.requestNo = requestNo;
+		this.aptuser = aptuser;
+		this.fctproblem = fctproblem;
+		this.problemDescription = problemDescription;
+		this.requestDate = requestDate;
+	}
+		
+		
 	public void setRequestNo(int requestNo){
 		this.requestNo = requestNo;
 	}
     
+
+
 	public int getRequestNo(){
 		return requestNo;
 	}
@@ -36,12 +49,12 @@ public class MaintenanceRequest {
 	public Date getRequestDate(){
 		return requestDate;
 	}
-	public void setProblemTypeNo(int problemtypeNo){
-		this.problemtypeNo = problemtypeNo;
+	public void setFacilityProblem(FacilityProblem fctproblem){
+		this.fctproblem = fctproblem;
 	}
     
-	public int getProblemTypeNo(){
-		return problemtypeNo;
+	public FacilityProblem getFacilityProblem(){
+		return fctproblem;
 	}
 	
 	public void setAptUser(AptUser aptuser){

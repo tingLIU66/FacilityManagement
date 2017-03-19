@@ -1,13 +1,21 @@
 package model.facility;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import dal.FacilityDAO;
+import model.facilitymaitenance.Maintenance;
+import model.facilityuse.FacilityUse;
 
 public class Apartment {
 	
 	private String apartmentID;
 	private String name;
+	private Set<Unit> units;
+	private FacilityDetail fctdetail;
+	private Set<Maintenance> maintainances = new HashSet<Maintenance>();
+	private FacilityUse fctuse;
+	private Set<Inspection> inspections;
 	
 	FacilityDAO facilitydao= new FacilityDAO();
 	
@@ -31,6 +39,57 @@ public class Apartment {
 		return name;
 	}
 	
+	public void setUnit(Set<Unit> units){
+		
+		this.units = units;
+	}
+	
+	public Set<Unit> getUnit(){
+		
+		return units;
+	}
+	
+	public void setFacilityDetail(FacilityDetail fctdetail){
+		
+		this.fctdetail = fctdetail;
+	}
+	
+	public FacilityDetail getFacilityDetail(){
+		
+		return fctdetail;
+	}
+	
+	
+	public void setMaintenance(Set<Maintenance> maintainances){
+		
+		this.maintainances = maintainances;
+	}
+	
+	public Set<Maintenance> getMaintenance(){
+		
+		return maintainances;
+	}
+	
+	public void setFacilityUse(FacilityUse fctuse){
+		
+		this.fctuse = fctuse;
+	}
+	
+	public FacilityUse getFacilityUse(){
+		
+		return fctuse;
+	}
+	
+	public void setInspection(Set<Inspection> inspections){
+		
+		this.inspections = inspections;
+	}
+	
+	public Set<Inspection> getInspection(){
+		
+		return inspections;
+	}
+	
 
 	
 	public FacilityDetail getFacilityInformation(String apartmentID) {
@@ -50,6 +109,10 @@ public class Apartment {
     	
     }
     
-  
+  //  public void addMaintenance(Maintenance maint){
+    	
+    	//facilitydao.addMaintenance(maint);
+    	
+   // }
 
 }

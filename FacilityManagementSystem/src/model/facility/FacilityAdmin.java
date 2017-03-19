@@ -9,6 +9,8 @@ public class FacilityAdmin {
 	private String adminName;
 	private String adminLocation;
 	private String officePhoneNo;
+	private Set<Apartment> apartments;
+	private Set<Staff> staffs;
 	
 	FacilityDAO facilitydao = new FacilityDAO();
 	
@@ -35,6 +37,28 @@ public class FacilityAdmin {
 	public String getOfficePhoneNo(){
 		return officePhoneNo;
 	}
+	
+	public void setApartment(Set<Apartment> apartments){
+		
+		this.apartments = apartments;
+	}
+	
+	public Set<Apartment> getApartment() {
+		
+		return apartments;
+	}
+	
+	public void setStaff(Set<Staff> staffs){
+		
+		this.staffs = staffs;
+	}
+	
+	public Set<Staff> getStaff() {
+		
+		return staffs;
+	}
+	
+
 	
 	public Set<Apartment> listFacilities() {
 		

@@ -11,11 +11,20 @@ public class Schedule {
 	private Staff staff;
 	//private MaintenanceRequest maintrequest;
 	
-	
+	public Schedule(int scheduleNo, Date scheduleDate, Staff staff) {
+		
+		this.scheduleNo = scheduleNo;
+		this.scheduleDate = scheduleDate;
+		this.staff = staff;
+	}
+		
+		
 	public void setScheduleNo(int scheduleNo){
 		this.scheduleNo = scheduleNo;
 	}
     
+
+
 	public int getScheduleNo(){
 		return scheduleNo;
 	}
