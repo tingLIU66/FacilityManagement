@@ -14,6 +14,23 @@
 	 <bean id="staff" class="model.facility.Staff" scope="prototype" />
 	 <bean id="facilitydetail" class="model.facility.FacilityDetail" scope="prototype" />
 	 <bean id="unit" class="model.facility.Unit" scope="prototype" />
+	 <bean id="cost" class="model.facilitymaitenance.Cost"
+	 	scope="prototype">
+	 </bean>
+	 <bean id="aptuser" class="model.facilityuse.AptUser"
+	 	scope="prototype">
+	 </bean>
+	 <bean id="facilityuse" class="model.facilityuse.FacilityUse"
+	 	scope="prototype">
+	 </bean>
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 	 
 	 <bean id="maintrequest" class="model.facilitymaitenance.MaintenanceRequest" scope="prototype">
 	     <property name="aptuser" ref="aptuser" />
@@ -24,6 +41,9 @@
 
 
 	  
+	 
+	 
+	 
 	 <bean id="apartment" class="model.facility.Apartment" scope="prototype">
 	     <property name="fctdetail" ref="facilitydetail" />
 	     
@@ -54,16 +74,20 @@
             -->
          </property>
        </bean>
-	     
-	  <bean id="maintenance"  class="model.facilitymaitenance.Maintenance" scope="prototype" >
+
+	 
+	 
+	 
+	 <bean id="maintenance" class="model.facilitymaitenance.Maintenance"
+	 	scope="prototype">
 	    <property name="maintrequest" ref="maintrequest" />
 	    <property name="schedule" ref="schedule" />
 	    <property name="maintorder" ref="maintorder" />	 	  
 	  </bean>
-	  
-	  <bean id="facilityadmin"  class="model.facility.FacilityAdmin" scope="prototype" >
+	 <bean id="facilityadmin" class="model.facility.FacilityAdmin"
+	 	scope="prototype">
 	    <property name="apartments">
-	     <set/>
+	     <set />
         	<!-- 
          	<set>
              	<ref bean="apartment" />
@@ -72,7 +96,7 @@
          </property>
 	     
 	      <property name="staffs">
-	     <set/>
+	     <set />
         	<!-- 
          	<set>
              	<ref bean="staff" />
@@ -80,5 +104,25 @@
             -->
          </property>
 	  </bean>
+	 <bean id="maintenanceorder"
+	 	class="model.facilitymaitenance.MaintenanceOrder"
+	 	scope="prototype">
+	 <property name="cost" ref="cost"></property>
+	 </bean>
+	 
+	  
+	  
+	 
+	 
+	 
+	 
 
+	  
+	  
+	 
+	 
+	 <bean id="schedule" class="model.facilitymaitenance.Schedule"
+	 	scope="prototype">
+	 <property name="staff" ref="staff"></property>
+	 </bean>
 </beans>
