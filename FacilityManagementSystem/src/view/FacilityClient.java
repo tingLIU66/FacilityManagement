@@ -24,7 +24,8 @@ public class FacilityClient {
    
     FacilityAdmin fadmin = (FacilityAdmin)context.getBean("facilityadmin");
     Apartment apt = (Apartment)context.getBean("apartment");
-    FacilityDetail fdetail = (FacilityDetail)context.getBean("facilitydetail");
+    //FacilityDetail fdetail = (FacilityDetail)context.getBean("facilitydetail");
+    FacilityDetail fdetail = apt.getFctdetail();
     Set<Apartment> apartments = fadmin.listFacilities();
 	
 	System.out.println("-----------------List All the Facility under management: --------------------------------");
@@ -61,7 +62,7 @@ public class FacilityClient {
 		System.out.println("Aartment( " + addaptid + ", " + name + ")added successfully!");
 		System.out.println();
 	
-	System.out.println("-----------------Remove a new Facility to manage:-----------------------------------------------");
+	System.out.println("-----------------Remove a new Facility:--------------------------------------------------------");
 		System.out.println("Input apartmentID you want you remove:"); 
 		String delaptid = sc.next();
 		System.out.println(fadmin.removeFacility(delaptid));	

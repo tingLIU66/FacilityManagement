@@ -225,6 +225,7 @@ public String removeFacility(String apartmentID){
 
 	} catch (SQLException e) {
 		System.out.println(e.toString());
+		
 	}
 
 	super.closeConnection(connection);

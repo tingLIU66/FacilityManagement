@@ -24,13 +24,7 @@
 	 	scope="prototype">
 	 </bean>
 	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+	
 	 
 	 <bean id="maintrequest" class="model.facilitymaitenance.MaintenanceRequest" scope="prototype">
 	     <property name="aptuser" ref="aptuser" />
@@ -38,12 +32,6 @@
 	  </bean>
 
 
-
-
-	  
-	 
-	 
-	 
 	 <bean id="apartment" class="model.facility.Apartment" scope="prototype">
 	     <property name="fctdetail" ref="facilitydetail" />
 	     
@@ -74,15 +62,12 @@
             -->
          </property>
        </bean>
-
-	 
-	 
-	 
+ 
 	 <bean id="maintenance" class="model.facilitymaitenance.Maintenance"
 	 	scope="prototype">
 	    <property name="maintrequest" ref="maintrequest" />
 	    <property name="schedule" ref="schedule" />
-	    <property name="maintorder" ref="maintorder" />	 	  
+	    <property name="maintorder" ref="maintenanceorder" />	 	  
 	  </bean>
 	 <bean id="facilityadmin" class="model.facility.FacilityAdmin"
 	 	scope="prototype">
@@ -109,17 +94,7 @@
 	 	scope="prototype">
 	 <property name="cost" ref="cost"></property>
 	 </bean>
-	 
-	  
-	  
-	 
-	 
-	 
-	 
 
-	  
-	  
-	 
 	 
 	 <bean id="schedule" class="model.facilitymaitenance.Schedule"
 	 	scope="prototype">

@@ -7,6 +7,10 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import model.facility.Staff;
 import model.facilitymaitenance.Cost;
 import model.facilitymaitenance.Maintenance;
@@ -18,10 +22,12 @@ public class MaintenanceClient {
 
 		
 		public static void main(String args[]) throws Exception {
-
+			
+			
+		ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/facility-app.xml");
 		Scanner sc = new Scanner(System.in);
 	    System.out.println("*************** Creating Maintenance related objects ***************************");
-	    Maintenance maint = new Maintenance(); 
+	    Maintenance maint = (Maintenance)context.getBean("maintenance");
 	   // Cost cost = new Cost();
 	    
 	    System.out.println("*************List all the maintenances summary of a specific apartment*************************");
@@ -82,8 +88,7 @@ public class MaintenanceClient {
 		System.out.println("*************List the problems reported for a specific apartment, sorted by times********");
 		System.out.println("Input apartmentID:");
 		String paptID = sc.next();   
-		HashMap<String, Integer> pmap = new HashMap<>();		
-		pmap = maint.listFacilityProblems(paptID);
+		HashMap<String, Integer> pmap = maint.listFacilityProblems(paptID);		
 		System.out.println("The problems reported for " + paptID+ " is as below:");
 		System.out.println();
 		System.out.println("Probelm reported | Times ");
@@ -99,7 +104,7 @@ public class MaintenanceClient {
 		
 		System.out.println("*************Make a maintenance requset*****************************************");
 	    //Initial a user
-		Maintenance maint1 = new Maintenance();
+		Maintenance maint1 = (Maintenance)context.getBean("maintenance");
 	    
 	    int problemtypeNo = 2;
 	    String pdescription = "Light switch broken";
@@ -122,7 +127,7 @@ public class MaintenanceClient {
 		System.out.println("*************Schedule a maintenance**************************************************");
 	    //Initial a Staff
 	    //Schedule schedule = new Schedule();
-	    Staff staff = new Staff();
+	    Staff staff = (Staff)context.getBean("staff");
 	    staff.setstaffID(2);
 	    staff.setstaffFname("Kavin");
 	    staff.setstaffLname("Clain");
