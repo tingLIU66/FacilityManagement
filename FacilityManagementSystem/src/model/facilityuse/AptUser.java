@@ -9,14 +9,7 @@ public class AptUser implements AptUserIntf
 	private String UnitNo;
 	private String ApartmentID;
 	
-	
-	
-	public AptUser(String userName, String phoneNo, String unitNo, String apartmentID) {
-		this.UserName = userName;
-		this.PhoneNo = phoneNo;
-		this.UnitNo = unitNo;
-		this.ApartmentID = apartmentID;
-	}
+
 
 	public void setUserName (String UserName){
 		this.UserName = UserName;

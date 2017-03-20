@@ -20,12 +20,6 @@ public class Maintenance {
 	o public object listFacilityProblems() 
 */	
 	private int maintenanceNo;
-	//private String apartmentID;
-	//private String unitNo;
-	//private Date requestdate;
-	//private String problemType;
-	//private String maintenanceTechnician;
-	//private Date finisheddate;
 	private MaintenanceRequest maintrequest;
 	private MaintenanceOrder maintorder;
 	private Schedule schedule;

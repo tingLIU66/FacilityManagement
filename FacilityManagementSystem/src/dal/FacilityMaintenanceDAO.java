@@ -44,7 +44,9 @@ public class FacilityMaintenanceDAO extends DBoperate{
 	public MaintenanceRequest makeFacilityMaintRequest(int problemtypeNo, String pdescription, String username){
 		
 		int requestNo = 0;
-		MaintenanceRequest maintrequest = null;
+		MaintenanceRequest maintrequest = new MaintenanceRequest();
+		AptUser user = new AptUser();
+		FacilityProblem fproblem = new FacilityProblem();
 		String addquery = "INSERT INTO maintenancerequest(`ProblemTypeNo`,`ProblemDescription`,`UserName`) VALUES(?,?,?);";
 		String selectquery = "SELECT `RequestNo`,a.`UserName`, `PhoneNo`,`UnitNo`,`ApartmentID`, f.`ProblemTypeNo`,`ProblemType`,`ProblemDescription`,`RequestDate`"
 							+ " FROM `maintenancerequest` AS m,aptuser AS a,facilityproblem AS f"
@@ -86,9 +88,21 @@ public class FacilityMaintenanceDAO extends DBoperate{
 			ResultSet rs1 = preStatement2.executeQuery();
 			
 			if(rs1.next()){
-				maintrequest = new MaintenanceRequest(requestNo, new AptUser(rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5)),
-														new FacilityProblem(rs1.getInt(6),rs1.getString(7)), rs1.getString(8),rs1.getDate(9));
-
+				user.setUserName(rs1.getString(2));
+				user.setPhoneNo(rs1.getString(3));
+				user.setUnitNo(rs1.getString(4));
+				user.setApartmentID(rs1.getString(5));
+				
+				fproblem.setProblemTypeNo(rs1.getInt(6));
+				fproblem.setProblemType(rs1.getString(7));
+				
+				maintrequest.setRequestNo(requestNo);
+				maintrequest.setAptUser(user);
+				maintrequest.setFacilityProblem(fproblem);
+				maintrequest.setProblemDescriptin(rs1.getString(8));
+				maintrequest.setRequestDate(rs1.getDate(9));
+				
+				
 			}
 			
 			stmt.close();
@@ -112,7 +126,7 @@ public class FacilityMaintenanceDAO extends DBoperate{
 	public Schedule scheduleMaintenance(int maintenanceNo, Date sdate, Staff staff ){
 		
 		int scheduleNo = 0;
-		Schedule schedule = null;
+		Schedule schedule = new Schedule();
 		String addquery = "INSERT INTO schedule(`ScheduleDate`,`StaffID`) VALUES(?,?);";
 		String selectquery = "Select * From schedule where `ScheduleNo` = ?";
 		String updatemaintrecordquery = "update Maintenance set `ScheduleNo` = ? where maintenanceNo = ?;";
@@ -145,7 +159,12 @@ public class FacilityMaintenanceDAO extends DBoperate{
 			ResultSet rs1 = preStatement2.executeQuery();
 			
 			if(rs1.next()){
-				schedule = new Schedule(scheduleNo,rs1.getDate(2),staff);
+				
+				schedule.setScheduleNo(scheduleNo);
+				schedule.setScheduleDate(rs1.getDate(2));
+				schedule.setStaff(staff);
+				
+				
 
 			}
 			
@@ -181,11 +200,25 @@ public class FacilityMaintenanceDAO extends DBoperate{
 			requests.clear();
 
 			while (rs1.next()) {
-				MaintenanceRequest request = new MaintenanceRequest(rs1.getInt(1),new AptUser(rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5)),
-						                                            new FacilityProblem(rs1.getInt(6),rs1.getString(7)),rs1.getString(8),rs1.getDate(9));          
-	            	
+				MaintenanceRequest maintrequest = new MaintenanceRequest();
+				AptUser user = new AptUser();
+				FacilityProblem fproblem = new FacilityProblem();
+				
+				user.setUserName(rs1.getString(2));
+				user.setPhoneNo(rs1.getString(3));
+				user.setUnitNo(rs1.getString(4));
+				user.setApartmentID(rs1.getString(5));
+				
+				fproblem.setProblemTypeNo(rs1.getInt(6));
+				fproblem.setProblemType(rs1.getString(7));
+				
+				maintrequest.setRequestNo(rs1.getInt(1));
+				maintrequest.setAptUser(user);
+				maintrequest.setFacilityProblem(fproblem);
+				maintrequest.setProblemDescriptin(rs1.getString(8));
+				maintrequest.setRequestDate(rs1.getDate(9));	            	
 	    			
-	    		requests.add(request);
+	    		requests.add(maintrequest);
 	            }
 	        
 
@@ -232,13 +265,51 @@ public class FacilityMaintenanceDAO extends DBoperate{
 
 			while (rs1.next()) {
 				Maintenance maintenance = new Maintenance();
-				
-				     	            	
+				MaintenanceRequest maintrequest = new MaintenanceRequest();
+				Schedule schedule = new Schedule();
+				MaintenanceOrder order = new MaintenanceOrder();
+				AptUser user = new AptUser();
+				FacilityProblem fproblem = new FacilityProblem();
+				Staff staff = new Staff();
+				Cost cost = new Cost();
+				//set user for Maintrequest
+				user.setUserName(rs1.getString(3));
+				user.setPhoneNo(rs1.getString(4));
+				user.setUnitNo(rs1.getString(5));
+				user.setApartmentID(rs1.getString(6));
+				//set FacilityProblem for maintrequest
+				fproblem.setProblemTypeNo(rs1.getInt(7));
+				fproblem.setProblemType(rs1.getString(8));
+				//set maintrequest
+				maintrequest.setRequestNo(rs1.getInt(2));
+				maintrequest.setAptUser(user);
+				maintrequest.setFacilityProblem(fproblem);
+				maintrequest.setProblemDescriptin(rs1.getString(9));
+				maintrequest.setRequestDate(rs1.getDate(10));
+				//set Staff for schedule
+				staff.setstaffID(rs1.getInt(13));
+				staff.setstaffFname(rs1.getString(14));
+				staff.setstaffLname(rs1.getString(15));
+				staff.setSpecialty(rs1.getString(16));
+				//set schedule
+				schedule.setScheduleNo(rs1.getInt(11));
+				schedule.setScheduleDate(rs1.getDate(12));
+				schedule.setStaff(staff);
+				//set cost for order
+				cost.setLaborCost(rs1.getFloat(22));
+				cost.setMaterialCost(rs1.getFloat(23));
+				cost.setTotal();
+				//set order
+				order.setOrderNo(rs1.getInt(17));
+				order.setOrderDate(rs1.getDate(18));
+				order.setOrderStatus(rs1.getString(19));
+				order.setFinishedDate(rs1.getDate(20));
+				order.setCost(cost);
+				//set maintenance     	            	
 	                maintenance.setMaintenanceNo(rs1.getInt(1));
-	                maintenance.setMaintenanceRequest(new MaintenanceRequest(rs1.getInt(2),new AptUser(rs1.getString(3),rs1.getString(4),rs1.getString(5),rs1.getString(6)),
-                                                                             new FacilityProblem(rs1.getInt(7),rs1.getString(8)),rs1.getString(9),rs1.getDate(10)));
-	                maintenance.setSchedule(new Schedule(rs1.getInt(11),rs1.getDate(12),new Staff(rs1.getInt(13),rs1.getString(14),rs1.getString(15), rs1.getString(16))));
-	                maintenance.setMaintenanceOrder(new MaintenanceOrder(rs1.getInt(17), rs1.getDate(18),rs1.getString(19),rs1.getDate(20), new Cost(rs1.getFloat(22),rs1.getFloat(22))));
+	                maintenance.setMaintenanceRequest(maintrequest);
+	                maintenance.setSchedule(schedule);
+	                maintenance.setMaintenanceOrder(order);
                     	
      	           	maintenances.add(maintenance);
 	            
@@ -341,7 +412,7 @@ public class FacilityMaintenanceDAO extends DBoperate{
 
 	
 	 public Cost calcMaintenanceCostForFacility(String apartmentID){
-		 Cost cost = null;
+		 Cost cost = new Cost();
 		 
 		 String getcostquery = "SELECT SUM(`LaborCost`),SUM(`MaterialCost`)"
 		 						+ " FROM maintenance AS m, maintenanceorder AS mo,cost AS c, maintenancerequest AS mr, aptuser AS a"
@@ -361,7 +432,10 @@ public class FacilityMaintenanceDAO extends DBoperate{
 				
 
 				if (rs.next()) {
-					cost = new Cost(rs.getFloat(1),rs.getFloat(2));
+					
+					cost.setLaborCost(rs.getFloat(1));
+					cost.setMaterialCost(rs.getFloat(2));
+					cost.setTotal();
 
 		            }
 		     

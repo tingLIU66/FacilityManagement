@@ -68,11 +68,11 @@ public class FacilityUseClient {
 	System.out.println("Input UnitNo:");
 	String unitNoID5 = sc.next();
 	
-	AptUser aptuser = new AptUser("test user","1111111111",inputaptID,unitNoID5);
-	//aptuser.setUserName("test user");
-	//aptuser.setPhoneNo("1111111111");
-	//aptuser.setApartmentID(inputaptID5);
-	//aptuser.setUnitNo(unitNoID5);
+	AptUser aptuser = new AptUser();
+	aptuser.setUserName("test user");
+	aptuser.setPhoneNo("1111111111");
+	aptuser.setApartmentID(inputaptID5);
+	aptuser.setUnitNo(unitNoID5);
 	
 	fuse.assignFacility(inputaptID5, unitNoID5, aptuser);
 	System.out.println();

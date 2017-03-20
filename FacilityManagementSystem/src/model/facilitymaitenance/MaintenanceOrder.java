@@ -11,15 +11,7 @@ public class MaintenanceOrder {
 	private Date finishedDate;
 	private Cost cost;
 	
-	
-	public MaintenanceOrder(int orderNo, Date orderDate, String orderStatus, Date finishedDate, Cost cost) {
-		
-		this.orderNo = orderNo;
-		this.orderDate = orderDate;
-		this.orderStatus = orderStatus;
-		this.finishedDate = finishedDate;
-		this.cost = cost;
-	}
+
 
 	public void setOrderNo(int orderNo){
 		this.orderNo = orderNo;

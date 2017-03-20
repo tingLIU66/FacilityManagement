@@ -22,7 +22,8 @@ public class MaintenanceClient {
 		Scanner sc = new Scanner(System.in);
 	    System.out.println("*************** Creating Maintenance related objects ***************************");
 	    Maintenance maint = new Maintenance(); 
-	  	    
+	   // Cost cost = new Cost();
+	    
 	    System.out.println("*************List all the maintenances summary of a specific apartment*************************");
 		Set<Maintenance> allmaints = new HashSet<>();
 		System.out.println("Input apartmentID you want to check:");
@@ -101,7 +102,13 @@ public class MaintenanceClient {
 		System.out.println("*************Make a maintenance requset*****************************************");
 	    //Initial a user
 		Maintenance maint1 = new Maintenance();
-   
+	   // MaintenanceRequest mrequest 
+	   // AptUser aptuser = new AptUser();
+	   // aptuser.setUserName("Ting Liu");
+	   // aptuser.setPhoneNo("3124446666");
+	   // aptuser.setUnitNo("1A");
+	   // aptuser.setApartmentID("APT001");
+	    
 	    int problemtypeNo = 2;
 	    String pdescription = "Light switch broken";
 	    String username = "Ting Liu";
@@ -122,7 +129,13 @@ public class MaintenanceClient {
 		
 		System.out.println("*************Schedule a maintenance**************************************************");
 	    //Initial a Staff
-	    Staff staff = new Staff(2,"Kavin", "Clain", "Electricity");
+	    //Schedule schedule = new Schedule();
+	    Staff staff = new Staff();
+	    staff.setstaffID(2);
+	    staff.setstaffFname("Kavin");
+	    staff.setstaffLname("Clain");
+	    staff.setSpecialty("Electricity");
+	    
 		Date sdate = new Date(2016, 2, 22);	  
 	   
 		Schedule schedule = maint.scheduleMaintenance(maint1.getMaintenanceNo(), sdate, staff);

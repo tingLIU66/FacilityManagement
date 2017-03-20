@@ -7,14 +7,6 @@ public class Staff
 	private String staffFname;
 	private String specialty;
 	
-	
-	public Staff(int staffID, String staffLname, String staffFname, String specialty) {
-		super();
-		this.staffID = staffID;
-		this.staffLname = staffLname;
-		this.staffFname = staffFname;
-		this.specialty = specialty;
-	}
 
 	public void setstaffLname(String staffLname){
 		this.staffLname = staffLname;

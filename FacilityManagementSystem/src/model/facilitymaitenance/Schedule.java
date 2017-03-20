@@ -10,14 +10,7 @@ public class Schedule {
 	private Date scheduleDate;	
 	private Staff staff;
 	//private MaintenanceRequest maintrequest;
-	
-	public Schedule(int scheduleNo, Date scheduleDate, Staff staff) {
-		
-		this.scheduleNo = scheduleNo;
-		this.scheduleDate = scheduleDate;
-		this.staff = staff;
-	}
-		
+
 		
 	public void setScheduleNo(int scheduleNo){
 		this.scheduleNo = scheduleNo;

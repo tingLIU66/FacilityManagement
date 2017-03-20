@@ -7,16 +7,7 @@ public class Cost implements CostIntf{
 	private float laborCost;	
 	private float materialCost;
 	private float total;
-	
-	
-	
-	
-	public Cost(float laborCost, float materialCost) {
-		
-		this.laborCost = laborCost;
-		this.materialCost = materialCost;
-		this.total = laborCost + materialCost;
-	}
+
 
 	public void setLaborCost(float laborCost){
 		this.laborCost = laborCost;

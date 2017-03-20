@@ -13,23 +13,12 @@ public class MaintenanceRequest {
 	private String problemDescription;
 	private Date requestDate;	
 	//private int problemtypeNo;
-	
-		public MaintenanceRequest(int requestNo, AptUser aptuser, FacilityProblem fctproblem, String problemDescription,
-			Date requestDate) {
-		this.requestNo = requestNo;
-		this.aptuser = aptuser;
-		this.fctproblem = fctproblem;
-		this.problemDescription = problemDescription;
-		this.requestDate = requestDate;
-	}
-		
+
 		
 	public void setRequestNo(int requestNo){
 		this.requestNo = requestNo;
 	}
-    
-
-
+   
 	public int getRequestNo(){
 		return requestNo;
 	}
