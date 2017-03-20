@@ -4,7 +4,7 @@ import java.sql.Date;
 
 import model.facility.Staff;
 
-public class Schedule implements ScheduleIntf{
+public class Schedule {
 	
 	private int scheduleNo;
 	private Date scheduleDate;	

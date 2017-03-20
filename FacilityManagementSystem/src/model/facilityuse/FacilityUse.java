@@ -9,6 +9,16 @@ import java.util.Set;
 
 public class FacilityUse implements FacilityUseIntf {
 	
+	private Set<AptUser> aptusers;
+	
+	public Set<AptUser> getAptusers() {
+		return aptusers;
+	}
+
+	public void setAptusers(Set<AptUser> aptusers) {
+		this.aptusers = aptusers;
+	}
+
 	private FacilityUseDAO facUseDAO = new FacilityUseDAO();
 	
 	/**

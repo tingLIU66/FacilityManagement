@@ -10,6 +10,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import model.facility.Apartment;
 import model.facility.Staff;
 import model.facilitymaitenance.Cost;
@@ -32,7 +35,9 @@ public class FacilityMaintenanceDAO extends DBoperate{
 */
 	public FacilityMaintenanceDAO(){
 			super();
-	}
+			
+			}
+
 
 	/**
 	 * 
@@ -44,6 +49,7 @@ public class FacilityMaintenanceDAO extends DBoperate{
 	public MaintenanceRequest makeFacilityMaintRequest(int problemtypeNo, String pdescription, String username){
 		
 		int requestNo = 0;
+
 		MaintenanceRequest maintrequest = new MaintenanceRequest();
 		AptUser user = new AptUser();
 		FacilityProblem fproblem = new FacilityProblem();
@@ -97,8 +103,8 @@ public class FacilityMaintenanceDAO extends DBoperate{
 				fproblem.setProblemType(rs1.getString(7));
 				
 				maintrequest.setRequestNo(requestNo);
-				maintrequest.setAptuser(user);
-				maintrequest.setFctproblem(fproblem);
+			//	maintrequest.setAptuser(user);
+			//	maintrequest.setFctproblem(fproblem);
 				maintrequest.setProblemDescription(rs1.getString(8));
 				maintrequest.setRequestDate(rs1.getDate(9));
 				
