@@ -11,46 +11,37 @@ public class MaintenanceRequest {
 	private AptUser aptuser;
 	private FacilityProblem fctproblem;
 	private String problemDescription;
-	private Date requestDate;	
-	//private int problemtypeNo;
-
-		
-	public void setRequestNo(int requestNo){
-		this.requestNo = requestNo;
-	}
-   
-	public int getRequestNo(){
+	private Date requestDate;
+	public int getRequestNo() {
 		return requestNo;
 	}
-	
-	public void setProblemDescriptin(String problemDescription){
-		this.problemDescription = problemDescription;
+	public void setRequestNo(int requestNo) {
+		this.requestNo = requestNo;
 	}
-    
-	public String getProblemDescription(){
-		return problemDescription;
-	}
-	
-	public void setRequestDate(Date requestDate){
-		this.requestDate = requestDate;
-	}
-    
-	public Date getRequestDate(){
-		return requestDate;
-	}
-	public void setFacilityProblem(FacilityProblem fctproblem){
-		this.fctproblem = fctproblem;
-	}
-    
-	public FacilityProblem getFacilityProblem(){
-		return fctproblem;
-	}
-	
-	public void setAptUser(AptUser aptuser){
-		this.aptuser = aptuser;
-	}
-    
-	public AptUser getAptUser(){
+	public AptUser getAptuser() {
 		return aptuser;
 	}
+	public void setAptuser(AptUser aptuser) {
+		this.aptuser = aptuser;
+	}
+	public FacilityProblem getFctproblem() {
+		return fctproblem;
+	}
+	public void setFctproblem(FacilityProblem fctproblem) {
+		this.fctproblem = fctproblem;
+	}
+	public String getProblemDescription() {
+		return problemDescription;
+	}
+	public void setProblemDescription(String problemDescription) {
+		this.problemDescription = problemDescription;
+	}
+	public Date getRequestDate() {
+		return requestDate;
+	}
+	public void setRequestDate(Date requestDate) {
+		this.requestDate = requestDate;
+	}	
+
+	
 }

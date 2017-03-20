@@ -7,5 +7,58 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd">
 
+ <description>Wiring the dependencies for the Facility management system Application.</description>
+ 
+	 
+	 <bean id="facilityproblem" class="model.facilitymaitenance.FacilityProblem" scope="prototype" />
+	 <bean id="staff" class="model.facility.Staff" scope="prototype" />
+	 <bean id="facilitydetail" class="model.facility.FacilityDetail" scope="prototype" />
+	 <bean id="unit" class="model.facility.Unit" scope="prototype" />
+	 
+	 <bean id="maintrequest" class="model.facilitymaitenance.MaintenanceRequest" scope="prototype">
+	     <property name="aptuser" ref="aptuser" />
+	     <property name="fctproblem" ref="facilityproblem" />
+	  </bean>
+
+
+
+
+	  
+	 <bean id="apartment" class="model.facility.Apartment" scope="prototype">
+	     <property name="fctdetail" ref="facilitydetail" />
+	     <property name="fctuse" ref="facilityuse" />
+	     <property name="inspections">
+	     <set/>
+        	<!-- 
+         	<set>
+             	<ref bean="inspection" />
+            </set>
+            -->
+         </property>
+	     
+	      <property name="units">
+	     <set/>
+        	<!-- 
+         	<set>
+             	<ref bean="unit" />
+            </set>
+            -->
+         </property>
+	     
+	      <property name="maintenances">
+	     <set/>
+        	<!-- 
+         	<set>
+             	<ref bean="maintenance" />
+            </set>
+            -->
+         </property>
+       </bean>
+	     
+	  <bean id="maintenance"  class="model.facilitymaitenance.Maintenance" scope="prototype" >
+	    <property name="maintrequest" ref="maintrequest" />
+	    <property name="schedule" ref="schedule" />
+	    <property name="maintorder" ref="maintorder" />	 	  
+	  </bean>
 
 </beans>

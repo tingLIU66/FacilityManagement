@@ -23,52 +23,53 @@ public class Maintenance {
 	private MaintenanceRequest maintrequest;
 	private MaintenanceOrder maintorder;
 	private Schedule schedule;
-	//private FacilityProblem fctproblem;
 	private Log log;
-	
+		
 	FacilityMaintenanceDAO mdao = new FacilityMaintenanceDAO();
 	
-	public void setMaintenanceNo(int maintenanceNo){
-		this.maintenanceNo = maintenanceNo;
-	}
-    
-	public int getMaintenanceNo(){
+	
+	
+    public int getMaintenanceNo() {
 		return maintenanceNo;
 	}
-	
-	public void setMaintenanceRequest(MaintenanceRequest maintrequest){
-		this.maintrequest = maintrequest;
+
+	public void setMaintenanceNo(int maintenanceNo) {
+		this.maintenanceNo = maintenanceNo;
 	}
-    
-	public MaintenanceRequest getMaintenanceRequest(){
+
+	public MaintenanceRequest getMaintrequest() {
 		return maintrequest;
 	}
-	
-	public void setSchedule(Schedule schedule){
-		this.schedule = schedule;
+
+	public void setMaintrequest(MaintenanceRequest maintrequest) {
+		this.maintrequest = maintrequest;
 	}
-    
-	public Schedule getSchedule(){
-		return schedule;
-	}
-	
-	public void setMaintenanceOrder(MaintenanceOrder maintorder){
-		this.maintorder = maintorder;
-	}
-    
-	public MaintenanceOrder getMaintenanceOrder(){
+
+	public MaintenanceOrder getMaintorder() {
 		return maintorder;
 	}
-	
-	public void setLog(Log log){
-		this.log = log;
+
+	public void setMaintorder(MaintenanceOrder maintorder) {
+		this.maintorder = maintorder;
 	}
-    
-	public Log getLog(){
+
+	public Schedule getSchedule() {
+		return schedule;
+	}
+
+	public void setSchedule(Schedule schedule) {
+		this.schedule = schedule;
+	}
+
+	public Log getLog() {
 		return log;
 	}
-	
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+
+	public void setLog(Log log) {
+		this.log = log;
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	public MaintenanceRequest makeFacilityMaintRequest(int problemtypeNo, String pdescription, String username){
 		return mdao.makeFacilityMaintRequest(problemtypeNo, pdescription, username);
 			

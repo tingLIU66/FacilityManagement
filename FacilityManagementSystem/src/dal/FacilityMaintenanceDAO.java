@@ -97,9 +97,9 @@ public class FacilityMaintenanceDAO extends DBoperate{
 				fproblem.setProblemType(rs1.getString(7));
 				
 				maintrequest.setRequestNo(requestNo);
-				maintrequest.setAptUser(user);
-				maintrequest.setFacilityProblem(fproblem);
-				maintrequest.setProblemDescriptin(rs1.getString(8));
+				maintrequest.setAptuser(user);
+				maintrequest.setFctproblem(fproblem);
+				maintrequest.setProblemDescription(rs1.getString(8));
 				maintrequest.setRequestDate(rs1.getDate(9));
 				
 				
@@ -213,9 +213,9 @@ public class FacilityMaintenanceDAO extends DBoperate{
 				fproblem.setProblemType(rs1.getString(7));
 				
 				maintrequest.setRequestNo(rs1.getInt(1));
-				maintrequest.setAptUser(user);
-				maintrequest.setFacilityProblem(fproblem);
-				maintrequest.setProblemDescriptin(rs1.getString(8));
+				maintrequest.setAptuser(user);
+				maintrequest.setFctproblem(fproblem);
+				maintrequest.setProblemDescription(rs1.getString(8));
 				maintrequest.setRequestDate(rs1.getDate(9));	            	
 	    			
 	    		requests.add(maintrequest);
@@ -282,9 +282,9 @@ public class FacilityMaintenanceDAO extends DBoperate{
 				fproblem.setProblemType(rs1.getString(8));
 				//set maintrequest
 				maintrequest.setRequestNo(rs1.getInt(2));
-				maintrequest.setAptUser(user);
-				maintrequest.setFacilityProblem(fproblem);
-				maintrequest.setProblemDescriptin(rs1.getString(9));
+				maintrequest.setAptuser(user);
+				maintrequest.setFctproblem(fproblem);
+				maintrequest.setProblemDescription(rs1.getString(9));
 				maintrequest.setRequestDate(rs1.getDate(10));
 				//set Staff for schedule
 				staff.setstaffID(rs1.getInt(13));
@@ -307,9 +307,9 @@ public class FacilityMaintenanceDAO extends DBoperate{
 				order.setCost(cost);
 				//set maintenance     	            	
 	                maintenance.setMaintenanceNo(rs1.getInt(1));
-	                maintenance.setMaintenanceRequest(maintrequest);
+	                maintenance.setMaintrequest(maintrequest);
 	                maintenance.setSchedule(schedule);
-	                maintenance.setMaintenanceOrder(order);
+	                maintenance.setMaintorder(order);
                     	
      	           	maintenances.add(maintenance);
 	            
