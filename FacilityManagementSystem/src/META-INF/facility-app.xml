@@ -26,7 +26,7 @@
 	  
 	 <bean id="apartment" class="model.facility.Apartment" scope="prototype">
 	     <property name="fctdetail" ref="facilitydetail" />
-	     <property name="fctuse" ref="facilityuse" />
+	     
 	     <property name="inspections">
 	     <set/>
         	<!-- 
@@ -59,6 +59,26 @@
 	    <property name="maintrequest" ref="maintrequest" />
 	    <property name="schedule" ref="schedule" />
 	    <property name="maintorder" ref="maintorder" />	 	  
+	  </bean>
+	  
+	  <bean id="facilityadmin"  class="model.facility.FacilityAdmin" scope="prototype" >
+	    <property name="apartments">
+	     <set/>
+        	<!-- 
+         	<set>
+             	<ref bean="apartment" />
+            </set>
+            -->
+         </property>
+	     
+	      <property name="staffs">
+	     <set/>
+        	<!-- 
+         	<set>
+             	<ref bean="staff" />
+            </set>
+            -->
+         </property>
 	  </bean>
 
 </beans>
