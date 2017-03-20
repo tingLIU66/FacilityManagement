@@ -25,10 +25,9 @@ public class MaintenanceClient {
 	   // Cost cost = new Cost();
 	    
 	    System.out.println("*************List all the maintenances summary of a specific apartment*************************");
-		Set<Maintenance> allmaints = new HashSet<>();
 		System.out.println("Input apartmentID you want to check:");
 		String aptid = sc.next();   
-		allmaints = maint.listMaintenance(aptid);
+		Set<Maintenance> allmaints = maint.listMaintenance(aptid);
 		Iterator<Maintenance> mit = allmaints.iterator();
 		while(mit.hasNext()) {
 			Maintenance singlemaint = (Maintenance) mit.next();
@@ -46,8 +45,7 @@ public class MaintenanceClient {
 	    
 		
 		System.out.println("*************List all maintenance request******************************************");
-		Set<MaintenanceRequest> requests = new HashSet<>();
-		requests = maint.listMaintRequests();
+		Set<MaintenanceRequest> requests = maint.listMaintRequests();
 		Iterator<MaintenanceRequest> it = requests.iterator();
 		while(it.hasNext()) {
 			MaintenanceRequest request = (MaintenanceRequest) it.next();
@@ -102,12 +100,6 @@ public class MaintenanceClient {
 		System.out.println("*************Make a maintenance requset*****************************************");
 	    //Initial a user
 		Maintenance maint1 = new Maintenance();
-	   // MaintenanceRequest mrequest 
-	   // AptUser aptuser = new AptUser();
-	   // aptuser.setUserName("Ting Liu");
-	   // aptuser.setPhoneNo("3124446666");
-	   // aptuser.setUnitNo("1A");
-	   // aptuser.setApartmentID("APT001");
 	    
 	    int problemtypeNo = 2;
 	    String pdescription = "Light switch broken";

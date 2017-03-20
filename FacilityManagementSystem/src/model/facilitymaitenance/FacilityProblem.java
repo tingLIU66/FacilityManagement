@@ -1,6 +1,6 @@
 package model.facilitymaitenance;
 
-public class FacilityProblem {
+public class FacilityProblem implements FProblemIntf{
 
 	private int problemtypeNo;
 	private String problemType;

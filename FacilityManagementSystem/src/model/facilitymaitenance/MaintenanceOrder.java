@@ -2,16 +2,13 @@ package model.facilitymaitenance;
 
 import java.sql.Date;
 
-public class MaintenanceOrder {
+public class MaintenanceOrder implements MaintOrderIntf{
 
 	private int orderNo;
 	private Date orderDate;	
-	//private Schedule schedule;
 	private String orderStatus;	
 	private Date finishedDate;
 	private Cost cost;
-	
-
 
 	public void setOrderNo(int orderNo){
 		this.orderNo = orderNo;

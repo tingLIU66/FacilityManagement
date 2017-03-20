@@ -1,6 +1,6 @@
 package model.facility;
 
-public class FacilityDetail {
+public class FacilityDetail implements FacilityDetailIntf{
 		
 	private String address;
 	private String zipcode;

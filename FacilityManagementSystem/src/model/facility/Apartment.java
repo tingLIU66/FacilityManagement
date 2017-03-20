@@ -7,7 +7,7 @@ import dal.FacilityDAO;
 import model.facilitymaitenance.Maintenance;
 import model.facilityuse.FacilityUse;
 
-public class Apartment {
+public class Apartment implements ApartmentIntf{
 	
 	private String apartmentID;
 	private String name;

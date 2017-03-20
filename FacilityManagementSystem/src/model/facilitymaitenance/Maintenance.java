@@ -8,7 +8,7 @@ import dal.FacilityMaintenanceDAO;
 import model.facility.Staff;
 import model.facilityuse.AptUser;
 
-public class Maintenance {
+public class Maintenance implements MaitenanceIntf{
 	
 /*	public object makeFacilityMaintRequest()
 	o public object scheduleMaintenance()

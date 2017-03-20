@@ -1,6 +1,6 @@
 package model.facility;
 
-public class Unit {
+public class Unit implements UnitIntf{
 		
 	private String unitNo;
 	private int bedroom;

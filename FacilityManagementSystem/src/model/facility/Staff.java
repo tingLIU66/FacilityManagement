@@ -1,6 +1,6 @@
 package model.facility;
 
-public class Staff 
+public class Staff implements StaffIntf
 {
 	private int staffID;
 	private String staffLname;
