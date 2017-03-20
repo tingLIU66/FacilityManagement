@@ -1,9 +1,12 @@
 package view;
 
-import java.util.HashSet;
+//import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Set;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import model.facility.Apartment;
 import model.facility.FacilityAdmin;
@@ -15,15 +18,28 @@ import model.facilityuse.AptUser;
 import model.facilityuse.FacilityUse;
 
 public class FacilityUseClient {
-	//public static void main (String args[]) throws Exception {
 	
 	
 	
-	public static void main(String args[]) throws Exception {
-
+	
+	public static void main (String args[]) throws Exception {
+		
+	ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/facility-app.xml");
 	Scanner sc = new Scanner(System.in);
     System.out.println("*************** Creating Facility related objects *************************");
-    FacilityAdmin fadmin = new FacilityAdmin(); 
+    
+    FacilityAdmin fadmin = (FacilityAdmin)context.getBean("facilityadmin");
+    Apartment apt = (Apartment)context.getBean("apartment");
+    FacilityDetail fdetail = (FacilityDetail)context.getBean("facilitydetail");
+    Set<Apartment> apartments = fadmin.listFacilities();
+    Unit aptUnit = (Unit) context.getBean("unit");
+    FacilityUse fuse = (FacilityUse)context.getBean("facilityuse");
+    
+    
+    
+    
+    ///////////////////////////////////////////////
+    /*FacilityAdmin fadmin = new FacilityAdmin(); 
     Apartment apt = new Apartment();
     FacilityDetail fdetail = new FacilityDetail();
     Set<Apartment> apartments = new HashSet<Apartment>();
@@ -31,7 +47,7 @@ public class FacilityUseClient {
     Unit aptUnit = new Unit();
     FacilityUse fuse = new FacilityUse();
     
-    apartments = fadmin.listFacilities();	
+    apartments = fadmin.listFacilities();	*/
 
 	
 	System.out.println("*************** Check if Facility is in use *****************************");
@@ -68,7 +84,8 @@ public class FacilityUseClient {
 	System.out.println("Input UnitNo:");
 	String unitNoID5 = sc.next();
 	
-	AptUser aptuser = new AptUser();
+	AptUser aptuser = (AptUser)context.getBean("aptuser");
+	//AptUser aptuser = new AptUser();
 	aptuser.setUserName("test user");
 	aptuser.setPhoneNo("1111111111");
 	aptuser.setApartmentID(inputaptID5);
@@ -82,9 +99,9 @@ public class FacilityUseClient {
 	System.out.println("Input apartmentID to list inspections"); 
 	System.out.println("Input apartmentID:");
 	String inputaptID6 = sc.next();
-	
-	Set<Inspection> inspections = new HashSet<Inspection>();
-	inspections = fuse.listInspections(inputaptID6);	
+	Set<Inspection> inspections = fuse.listInspections(inputaptID6);
+	/*Set<Inspection> inspections = new HashSet<Inspection>();
+	inspections = fuse.listInspections(inputaptID6);	*/
 	
 	Iterator<Inspection> it = inspections.iterator();
 	while(it.hasNext()) {
