@@ -21,7 +21,7 @@ public class FacilityUseClient {
 	
 	
 	
-
+	
 	public static void main (String args[]) throws Exception {
 		
 	ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/facility-app.xml");
