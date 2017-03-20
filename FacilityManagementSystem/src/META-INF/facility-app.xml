@@ -22,6 +22,14 @@
 	 </bean>
 	 <bean id="facilityuse" class="model.facilityuse.FacilityUse"
 	 	scope="prototype">
+	 	<property name="aptusers">
+	     <set/>
+        	<!-- 
+         	<set>
+             	<ref bean="aptuser" />
+            </set>
+            -->
+         </property>
 	 </bean>
 	 
 	
