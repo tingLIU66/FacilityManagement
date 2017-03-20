@@ -296,8 +296,8 @@ public class FacilityMaintenanceDAO extends DBoperate{
 				schedule.setScheduleDate(rs1.getDate(12));
 				schedule.setStaff(staff);
 				//set cost for order
-				cost.setLaborCost(rs1.getFloat(22));
-				cost.setMaterialCost(rs1.getFloat(23));
+				cost.setLaborCost(rs1.getFloat(21));
+				cost.setMaterialCost(rs1.getFloat(22));
 				cost.setTotal();
 				//set order
 				order.setOrderNo(rs1.getInt(17));
