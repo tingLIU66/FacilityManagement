@@ -37,13 +37,13 @@ public class MaintenanceClient {
 		Iterator<Maintenance> mit = allmaints.iterator();
 		while(mit.hasNext()) {
 			Maintenance singlemaint = (Maintenance) mit.next();
-			System.out.println("MaintenanceNo: " + singlemaint.getMaintenanceNo());
-			System.out.println("ApartmentID: " + singlemaint.getMaintrequest().getAptuser().getApartmentID());
-			System.out.println("Unit: " + singlemaint.getMaintrequest().getAptuser().getUnitNo());
-			System.out.println("Request Date: " + singlemaint.getMaintrequest().getRequestDate());
-			System.out.println("Prolem: " + singlemaint.getMaintrequest().getFctproblem().getProblemType());
-			System.out.println("Finished Date: " + singlemaint.getMaintorder().getFinishedDate());
-			System.out.println("Maintenance Technician: " + singlemaint.getSchedule().getStaff().getstaffFname());			
+			System.out.println("MaintenanceNo:\t\t\t" + singlemaint.getMaintenanceNo());
+			System.out.println("ApartmentID:\t\t\t" + singlemaint.getMaintrequest().getAptuser().getApartmentID());
+			System.out.println("Unit:\t\t\t\t" + singlemaint.getMaintrequest().getAptuser().getUnitNo());
+			System.out.println("Request Date:\t\t\t" + singlemaint.getMaintrequest().getRequestDate());
+			System.out.println("Prolem:\t\t\t\t" + singlemaint.getMaintrequest().getFctproblem().getProblemType());
+			System.out.println("Finished Date:\t\t\t" + singlemaint.getMaintorder().getFinishedDate());
+			System.out.println("Maintenance Technician:\t\t" + singlemaint.getSchedule().getStaff().getstaffFname());			
 			
 			System.out.println();
 		}
@@ -55,13 +55,13 @@ public class MaintenanceClient {
 		Iterator<MaintenanceRequest> it = requests.iterator();
 		while(it.hasNext()) {
 			MaintenanceRequest request = (MaintenanceRequest) it.next();
-			System.out.println("RuestNo: " + request.getRequestNo());
-			System.out.println("Date: " + request.getRequestDate());
-			System.out.println("Request UserName: " + request.getAptuser().getUserName());
-			System.out.println("ApartmentID: " + request.getAptuser().getApartmentID() );
-			System.out.println("Unit: " + request.getAptuser().getUnitNo());
-			System.out.println("Phone: " + request.getAptuser().getPhoneNo());
-			System.out.println("Problem: " + request.getProblemDescription());
+			System.out.println("RuestNo:\t\t" + request.getRequestNo());
+			System.out.println("Date:\t\t\t" + request.getRequestDate());
+			System.out.println("Request UserName:\t" + request.getAptuser().getUserName());
+			System.out.println("ApartmentID:\t\t" + request.getAptuser().getApartmentID() );
+			System.out.println("Unit:\t\t\t" + request.getAptuser().getUnitNo());
+			System.out.println("Phone:\t\t\t" + request.getAptuser().getPhoneNo());
+			System.out.println("Problem:\t\t" + request.getProblemDescription());
 			System.out.println();
 		}
 		
@@ -71,33 +71,32 @@ public class MaintenanceClient {
 		System.out.print("Input apartmentID:");
 		String aptID = sc.next();   
 	    Cost cost = maint.calcMaintenanceCostForFacility(aptID);
-		System.out.println();   
 		System.out.println("The cost of apartment " + aptID + " in 2016 is as below:");
-		System.out.println("LaborCost: " + cost.getLaborCost());
-		System.out.println("MaterialCost: " + cost.getMaterialCost());
-		System.out.println("Total " + cost.getTotal());
+		System.out.println("\tLaborCost:\t\t" + "$"+ cost.getLaborCost());
+		System.out.println("\tMaterialCost:\t\t" + "$"+ cost.getMaterialCost());
+		System.out.println("\tTotal\t\t\t" + "$"+ cost.getTotal());
 		System.out.println();
 		
 		System.out.println("---------------------Calculate the monthly problem rate of a specific apartment in a given year-------------");
-		System.out.println("Input apartmentID:");
+		System.out.print("Input apartmentID:");
 		String rateaptID = sc.next();   
 		float prate = maint.calcProblemRateForFacility(rateaptID);
 		System.out.println("The monthly problem rate of apartment " + rateaptID + " in 2016 is: "+ prate +"%");
 		System.out.println();
 	   
 		System.out.println("----------------------List the problems reported for a specific apartment, sorted by times--------------------");
-		System.out.println("Input apartmentID:");
+		System.out.print("Input apartmentID:");
 		String paptID = sc.next();   
 		HashMap<String, Integer> pmap = maint.listFacilityProblems(paptID);		
 		System.out.println("The problems reported for " + paptID+ " is as below:");
 		System.out.println();
-		System.out.println("Probelm reported | Times ");
+		System.out.println("\tProbelm reported\t\t|\tTimes ");
 		Iterator iter = pmap.entrySet().iterator(); 
 		while (iter.hasNext()) { 
 		    Map.Entry entry = (Map.Entry) iter.next(); 
 		    String ptype = (String) entry.getKey(); 
 		    int times = (int) entry.getValue(); 
-		    System.out.println("   "+ptype +"      |  "+ times);
+		    System.out.println("\t"+ptype +"\t\t\t|\t"+ times);
 		    System.out.println();
 		} 
 		
@@ -112,13 +111,13 @@ public class MaintenanceClient {
 	    
 	    MaintenanceRequest mrequest = maint.makeFacilityMaintRequest(problemtypeNo, pdescription, username);
 	    System.out.println("=======Your request is setted, please check the details=======================");
-	    System.out.println("RuestNo: " + mrequest.getRequestNo());
-		System.out.println("Date: " + mrequest.getRequestDate());
-		System.out.println("Request UserName: " + mrequest.getAptuser().getUserName());
-		System.out.println("ApartmentID: " + mrequest.getAptuser().getApartmentID());
-		System.out.println("Unit: " + mrequest.getAptuser().getUnitNo());
-		System.out.println("Phone: " + mrequest.getAptuser().getPhoneNo());
-		System.out.println("Problem: " + mrequest.getProblemDescription());
+	    System.out.println("RuestNo:\t\t" + mrequest.getRequestNo());
+		System.out.println("Date:\t\t\t" + mrequest.getRequestDate());
+		System.out.println("Request UserName:\t" + mrequest.getAptuser().getUserName());
+		System.out.println("ApartmentID:\t\t" + mrequest.getAptuser().getApartmentID());
+		System.out.println("Unit:\t\t\t" + mrequest.getAptuser().getUnitNo());
+		System.out.println("Phone:\t\t\t" + mrequest.getAptuser().getPhoneNo());
+		System.out.println("Problem:\t\t" + mrequest.getProblemDescription());
 		System.out.println();
 		
 		maint1.setMaintenanceNo(mrequest.getRequestNo());
@@ -127,7 +126,8 @@ public class MaintenanceClient {
 		System.out.println("----------------------------------------------Schedule a maintenance------------------------------------------------");
 	    //Initial a Staff
 	    //Schedule schedule = new Schedule();
-	    Staff staff = (Staff)context.getBean("staff");
+	    //Staff staff = (Staff)context.getBean("staff");
+		Staff staff = maint1.getSchedule().getStaff();
 	    staff.setstaffID(2);
 	    staff.setstaffFname("Kavin");
 	    staff.setstaffLname("Clain");
@@ -136,11 +136,11 @@ public class MaintenanceClient {
 		Date sdate = new Date(2016, 2, 22);	  
 	   
 		Schedule schedule = maint.scheduleMaintenance(maint1.getMaintenanceNo(), sdate, staff);
-	    System.out.println("===========A schedule has been palced=================================");
-	    System.out.println("ScheduleNo: " + schedule.getScheduleNo());
-		System.out.println("ScheduleDate: " + schedule.getScheduleDate());
-		System.out.println("Served Staff name: " + staff.getstaffFname() + " " +staff.getstaffLname());
-		System.out.println("Staff specialty: " + staff.getSpecialty());
+	    System.out.println("===========A schedule has been placed=================================");
+	    System.out.println("ScheduleNo:\t\t" + schedule.getScheduleNo());
+		System.out.println("ScheduleDate:\t\t" + schedule.getScheduleDate());
+		System.out.println("Served Staff name:\t" + staff.getstaffFname() + " " +staff.getstaffLname());
+		System.out.println("Staff specialty:\t" + staff.getSpecialty());
 		System.out.println();
 		maint1.setSchedule(schedule);
 		

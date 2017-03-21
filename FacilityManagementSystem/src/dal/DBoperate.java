@@ -26,6 +26,7 @@ public class DBoperate {
 
 			try {
 				System.out.println("Connecting to the MySQL database...");
+				System.out.println();
 				connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);	
 				//connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/facilitymanagementsystem", "DBuser", "DBkaimen");	
 				//System.out.println("MySQL Database connected!");

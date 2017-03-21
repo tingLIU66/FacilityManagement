@@ -33,8 +33,8 @@ public class FacilityClient {
 		Iterator<Apartment> it = apartments.iterator();
 		while(it.hasNext()) {
 			Apartment apt1 = (Apartment) it.next();		
-			System.out.println("ApartmentID: " + apt1.getApartmentID());
-			System.out.println("ApartmentName: " + apt1.getName());
+			System.out.println("ApartmentID:\t" + apt1.getApartmentID());
+			System.out.println("ApartmentName:\t" + apt1.getName());
 			System.out.println();
 		}
 	
@@ -44,12 +44,12 @@ public class FacilityClient {
 	    String aptID = sc.next();
 	    fdetail = apt.getFacilityInformation(aptID);
 	    System.out.println();   
-		System.out.println("ApartmentID: " + aptID);
-		System.out.println("Address: " + fdetail.getAddress() );
-		System.out.println("Zipcode: " + fdetail.getZipcode());
-		System.out.println("Age: " + fdetail.getAge());
-		System.out.println("Capacity: " + fdetail.getCapacity());
-		System.out.println("Parking: " + fdetail.getParking());
+		System.out.println("ApartmentID:\t" + aptID);
+		System.out.println("Address:\t" + fdetail.getAddress() );
+		System.out.println("Zipcode:\t" + fdetail.getZipcode());
+		System.out.println("Age:\t\t" + fdetail.getAge());
+		System.out.println("Capacity:\t" + fdetail.getCapacity());
+		System.out.println("Parking:\t" + fdetail.getParking());
 		System.out.println();
 	
 	System.out.println("---------------- Add a new Facility to manage: -----------------------------------------------");

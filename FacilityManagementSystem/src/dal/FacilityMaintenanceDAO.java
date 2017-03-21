@@ -103,8 +103,8 @@ public class FacilityMaintenanceDAO extends DBoperate{
 				fproblem.setProblemType(rs1.getString(7));
 				
 				maintrequest.setRequestNo(requestNo);
-			//	maintrequest.setAptuser(user);
-			//	maintrequest.setFctproblem(fproblem);
+				maintrequest.setAptuser(user);
+				maintrequest.setFctproblem(fproblem);
 				maintrequest.setProblemDescription(rs1.getString(8));
 				maintrequest.setRequestDate(rs1.getDate(9));
 				
