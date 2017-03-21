@@ -108,4 +108,5 @@
 	 	scope="prototype">
 	 <property name="staff" ref="staff"></property>
 	 </bean>
+
 </beans>

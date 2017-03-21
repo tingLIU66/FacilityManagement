@@ -26,12 +26,12 @@ public class MaintenanceClient {
 			
 		ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/facility-app.xml");
 		Scanner sc = new Scanner(System.in);
-	    System.out.println("*************** Creating Maintenance related objects ***************************");
+	   
 	    Maintenance maint = (Maintenance)context.getBean("maintenance");
 	   // Cost cost = new Cost();
 	    
-	    System.out.println("*************List all the maintenances summary of a specific apartment*************************");
-		System.out.println("Input apartmentID you want to check:");
+	    System.out.println("----------------------List all the maintenances summary of a specific apartment------------------");
+		System.out.print("Input apartmentID you want to check:");
 		String aptid = sc.next();   
 		Set<Maintenance> allmaints = maint.listMaintenance(aptid);
 		Iterator<Maintenance> mit = allmaints.iterator();
@@ -50,7 +50,7 @@ public class MaintenanceClient {
 	    
 	    
 		
-		System.out.println("*************List all maintenance request******************************************");
+		System.out.println("----------------------------List all maintenance request--------------------------------------------");
 		Set<MaintenanceRequest> requests = maint.listMaintRequests();
 		Iterator<MaintenanceRequest> it = requests.iterator();
 		while(it.hasNext()) {
@@ -67,25 +67,25 @@ public class MaintenanceClient {
 		
 		
 		
-		System.out.println("*************Calculate the cost of a specific apartment in a given year****************");
-		System.out.println("Input apartmentID:");
+		System.out.println("------------------------------Calculate the cost of a specific apartment in a given year-----------------");
+		System.out.print("Input apartmentID:");
 		String aptID = sc.next();   
 	    Cost cost = maint.calcMaintenanceCostForFacility(aptID);
-		System.out.println("============================================================================");   
+		System.out.println();   
 		System.out.println("The cost of apartment " + aptID + " in 2016 is as below:");
 		System.out.println("LaborCost: " + cost.getLaborCost());
 		System.out.println("MaterialCost: " + cost.getMaterialCost());
 		System.out.println("Total " + cost.getTotal());
 		System.out.println();
 		
-		System.out.println("******Calculate the monthly problem rate of a specific apartment in a given year********");
+		System.out.println("---------------------Calculate the monthly problem rate of a specific apartment in a given year-------------");
 		System.out.println("Input apartmentID:");
 		String rateaptID = sc.next();   
 		float prate = maint.calcProblemRateForFacility(rateaptID);
 		System.out.println("The monthly problem rate of apartment " + rateaptID + " in 2016 is: "+ prate +"%");
 		System.out.println();
 	   
-		System.out.println("*************List the problems reported for a specific apartment, sorted by times********");
+		System.out.println("----------------------List the problems reported for a specific apartment, sorted by times--------------------");
 		System.out.println("Input apartmentID:");
 		String paptID = sc.next();   
 		HashMap<String, Integer> pmap = maint.listFacilityProblems(paptID);		
@@ -102,7 +102,7 @@ public class MaintenanceClient {
 		} 
 		
 		
-		System.out.println("*************Make a maintenance requset*****************************************");
+		System.out.println("--------------------------------------------Make a maintenance requset--------------------------------------------");
 	    //Initial a user
 		Maintenance maint1 = (Maintenance)context.getBean("maintenance");
 	    
@@ -124,7 +124,7 @@ public class MaintenanceClient {
 		maint1.setMaintenanceNo(mrequest.getRequestNo());
 		maint1.setMaintrequest(mrequest);
 		
-		System.out.println("*************Schedule a maintenance**************************************************");
+		System.out.println("----------------------------------------------Schedule a maintenance------------------------------------------------");
 	    //Initial a Staff
 	    //Schedule schedule = new Schedule();
 	    Staff staff = (Staff)context.getBean("staff");
